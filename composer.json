@@ -1,0 +1,28 @@
+{
+    "name": "datalaere/php-web-app",
+    "type": "library",
+    "description": "PHP default web project.",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/datalaere/php-web-framework"
+        }
+    ],
+    "require": {
+        "datalaere/php-web-framework": "dev-main"
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "app/tests/"
+        }
+    }
+}

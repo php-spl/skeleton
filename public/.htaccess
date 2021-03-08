@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Manual routes
+#RewriteRule ^ index.php [L]
+
+# Automatic routes with controllers
+RewriteRule ^(.+)$ index.php?route=$1 [QSA,L]

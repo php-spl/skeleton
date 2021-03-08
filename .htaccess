@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^app - [L,NC]  
+RewriteRule ^vendor - [L,NC]
+RewriteRule ^(.*) public/$1 [L]  
