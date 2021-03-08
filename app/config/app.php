@@ -2,10 +2,11 @@
 
 return [
     'app' => [
+        'key' => '_csrf',
         'path' => ABSPATH,
         'views' => ABSPATH . '/app/views',
         'controllers' => ABSPATH . '/app/controllers/',
-        'url' => ''
+        'url' => 'http://localhost/dev/php-web-app'
     ],
     'db' => [
         'host' => '127.0.0.1',
