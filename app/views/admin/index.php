@@ -1,5 +1,5 @@
-<form action="<?php e($this->Config->get('app.url')) ?>/admin/create" method="post">
+<form action="<?php url('/admin/create'); ?>" method="post">
 <input type="text" name="" id="">
-<?php echo $this->CSRF; ?>
+<?php csrf(); ?>
 <input type="submit" value="Send">
 </form>
