@@ -11,7 +11,7 @@ return [
     'db' => [
         'host' => '127.0.0.1',
         'driver' => 'mysql',
-        'dbname' => '',
+        'dbname' => 'web-app',
         'username' => 'root',
         'password' => 'mysql',
         'charset' => 'utf8',

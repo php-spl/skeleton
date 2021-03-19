@@ -2,7 +2,7 @@
 
 $container = new Web\DI\Container;
 
-
+// Framework
 $container->set('Config', new Web\Config\Config());
 $container->Config->load(ABSPATH . '/app/config/app.php');
 
@@ -25,5 +25,9 @@ $container->set('Validator', new Web\Security\Validator(
     $container->Errors
 ));
 
+
+
+// Custom
+$container->set('User', new App\Models\User($container->DB));
 
 return $container;
