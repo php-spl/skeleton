@@ -4,8 +4,8 @@ return [
     'app' => [
         'key' => '_csrf',
         'path' => ABSPATH,
-        'views' => ABSPATH . '/app/views',
-        'controllers' => ABSPATH . '/app/controllers/',
+        'views' => ABSPATH . '/app/Views',
+        'controllers' => ABSPATH . '/app/Controllers/',
         'url' => 'http://localhost/dev/php-web-app'
     ],
     'db' => [

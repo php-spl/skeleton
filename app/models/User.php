@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
-use Web\MVC\Model;
+use Web\Database\Model;
 
 class User extends Model
 {
-  
+protected $prefix = 'wp.';
+
+  protected $fields = [
+      'username',
+      'password'
+  ];
     
 }
