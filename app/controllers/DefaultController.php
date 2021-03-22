@@ -12,8 +12,21 @@ class DefaultController extends Controller
           
     }
 
-    public function index() {
-        echo 'Hello there';
+    public function index() 
+    {
+        $data = $this->User->where('username', 'john')->exists();
+
+        dump($data);
+    }
+
+    public function create()
+    {
+        $this->User;
+    }
+
+    public function update($id)
+    {
+        $this->User;
     }
 
 }
