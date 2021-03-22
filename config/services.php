@@ -2,46 +2,62 @@
 
 use Web\DI\DIContainer;
 
-// Load container
-$container = new DIContainer;
-
 // Load config
-$container->set('config', function() {
+$app->set('config', function() {
     $config = new Web\Config\Config;
     $config->load(ABSPATH . '/config/app.php');
     return $config;
 });
 
 // Load sesion
-$container->set('session', function() {
+$app->set('session', function() {
     return new Web\Session\NativeSession;
 });
 
 // Load CSRF
-$container->set('csrf', function(DIContainer $c) {
+$app->set('csrf', function(DIContainer $c) {
    return new Web\Security\CSRF($c->config->get('app.key'));
 });
 
 // Load view
-$container->set('view', function(DIContainer $c) {
+$app->set('view', function(DIContainer $c) {
     $view = new Web\MVC\View($c);
-    return $view->setViewsPath(ABSPATH . '/app/views/');
+    $view->setViewsPath(ABSPATH . '/resources/views/');
+    return $view;
+});
+
+// Load cache
+$app->set('cache', function(DIContainer $c) {
+    $cache = new Web\Cache\FileCache(ABSPATH . '/storage/cache'); 
+    #$cache = new Web\Cache\PDOCache($pdo, "my_cache_table_name");
+    #$cache = new Web\Cache\ArrayCache(); 
+    return $cache;
 });
 
 // Load error handler
-$container->set('errors', function() {
+$app->set('errors', function() {
     return new Web\Log\Errors;
 });
 
 // Load error handler
-$container->set('db', function(DIContainer $c) {
+$app->set('db', function(DIContainer $c) {
     return new Web\Database\Database($c->config->db);
 });
 
 // Load validator
-$container->set('validator', function(DIContainer $c) {
+$app->set('validator', function(DIContainer $c) {
     return new Web\Security\Validator($c->db, $c->errors);
 });
 
+// Load auth
+$app->set('auth', function(DIContainer $c) {
+    return new Web\Security\Auth($c->user);
+});
 
-return $container;
+// Load router
+$app->set('router', function(DIContainer $c) {
+    $app = new Web\MVC\App($c);
+    $app->controller = 'Home';
+    $app->setPath($c->config->get('app.controllers'));
+    return $app;
+});

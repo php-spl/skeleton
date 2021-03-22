@@ -9,14 +9,43 @@ function e($string, $escape = true) {
  
  }
 
+ function __() {
+   
+ }
+
  function url($path = '') {
-   global $container;
-   echo $container->Config->get('app.url') . $path;
+  global $app;
+  echo $app->config->get('app.url') . $path;
+ }
+
+ function app() {
+  global $app;
+  return $app;
+ }
+
+ function layout($include) {
+  global $app;
+  include_once $app->config->get('app.views') . '/layouts/' . $include . '.php';
+ }
+
+ function config($path) {
+  global $app;
+  return $app->config->get($path);
+ }
+
+ function asset($path = '', $public = '/public/assets/') {
+  global $app;
+  return $app->config->get('app.url') . $public . $path;
+}
+
+ function view($path, $data = null) {
+   global $app;
+   return $app->view->render($path, $data);
  }
 
  function csrf() {
-  global $container;
-  echo $container->CSRF;
+  global $app;
+  echo $app->csrf;
 }
  
  function redirect($url) {

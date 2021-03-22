@@ -6,7 +6,7 @@ use Web\Database\Model;
 
 class User extends Model
 {
-protected $prefix = 'wp.';
+  protected $prefix = 'wp.';
 
   protected $fields = [
       'username',

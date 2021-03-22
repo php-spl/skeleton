@@ -1,7 +1,5 @@
 <?php
 
-ini_set('display_errors', true);
-
 define('ABSPATH', dirname(__DIR__));
 
 /*
@@ -17,6 +15,8 @@ define('ABSPATH', dirname(__DIR__));
 
 require_once ABSPATH . '/vendor/autoload.php';
 
+require_once ABSPATH . '/bootstrap/app.php';
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application
@@ -28,7 +28,5 @@ require_once ABSPATH . '/vendor/autoload.php';
 |
 */
 
-$app = require_once ABSPATH . '/bootstrap/app.php';
-
-$app->run();
+$app->router->run();
 

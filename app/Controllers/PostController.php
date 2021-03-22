@@ -4,17 +4,17 @@ namespace App\Controllers;
 
 use Web\MVC\Controller;
 
-class AdminController extends Controller
+class PostController extends Controller
 {
-
-    public function __construct($container)
+    public function __construct($app)
     {
-        parent::__construct($container);
+        parent::__construct($app);
+          
     }
 
     public function index() 
     {
-        $this->view->render('/admin/index');
+        view('home');
     }
 
     public function create()
@@ -29,7 +29,7 @@ class AdminController extends Controller
 
     public function show($id)
     {
-
+        echo $id;
     }
 
     public function edit($id)
@@ -51,5 +51,6 @@ class AdminController extends Controller
     {
         
     }
+
 
 }
