@@ -1,5 +1,5 @@
 <?php layout('frontend/header') ?>
 
-Hello World <?php dump(app()->auth) ?>
+Hello World 
 
 <?php layout('frontend/footer') ?>

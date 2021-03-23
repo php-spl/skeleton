@@ -38,7 +38,7 @@ function e($string, $escape = true) {
   return $app->config->get('app.url') . $public . $path;
 }
 
- function view($path, $data = null) {
+ function view($path, $data = []) {
    global $app;
    return $app->view->render($path, $data);
  }

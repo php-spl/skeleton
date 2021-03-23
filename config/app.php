@@ -19,6 +19,18 @@ return [
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
     ],
+    'router' => [
+        'base_folder' => ABSPATH,
+        'main_method' => 'index',
+        'paths' => [
+            'controllers' => 'app/Http/Controllers',
+            'middlewares' => 'app/Http/Middlewares',
+          ],
+          'namespaces' => [
+            'controllers' => 'App\Http\Controllers',
+            'middlewares' => 'App\Http\Middlewares',
+          ]
+    ],
     'mail' => [
         'host' => 'smtp.mail.com'
     ]

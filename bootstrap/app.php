@@ -25,10 +25,11 @@ $app = new DIContainer;
 |
 */
 
-require_once ABSPATH . '/config/models.php';
-
 require_once ABSPATH . '/config/services.php';
+
+require_once ABSPATH . '/config/models.php';
 
 require_once ABSPATH . '/bootstrap/functions.php';
 
+require_once ABSPATH . '/routes/web.php';
 
