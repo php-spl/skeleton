@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Web\Router\Http\Controller;
+use Web\Http\Controller;
+
+use App\Http\Middlewares\Authenticate;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        //Authenticate::handle();
+    }
+    
     /**
     * @var array Before Middlewares
     */
     public $middlewareBefore = [
-        \AuthMiddleware::class
+        \Authenticate::class
     ];
 
     /**
@@ -26,7 +34,7 @@ class PostController extends Controller
         view('home');
     }
 
-    public function getCreate()
+    public function create()
     {
         echo 'created';
     }

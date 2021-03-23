@@ -1,6 +1,6 @@
 <?php
 
-$app->router->controller('/', IndexController::class, ['name' => 'index']);
+$app->router->controller('/', IndexController::class);
 
 $app->router->controller('/home', HomeController::class);
 

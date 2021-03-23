@@ -2,11 +2,11 @@
 
 namespace App\Http\Middlewares;
 
-use Web\Router\Http\Middleware;
+use Web\Http\Middleware;
 
-class AuthMiddleware extends Middleware
+class Authenticate 
 {
-  public function handle()
+  public static function handle()
   {
     if (!app()->session->get('auth')) {
       

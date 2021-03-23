@@ -20,9 +20,9 @@ $app->set('csrf', function(DIContainer $c) {
 });
 
 // View
-$app->set('view', function(DIContainer $c) {
-    $view = new Web\MVC\View($c);
-    $view->setViewsPath(ABSPATH . '/resources/views/');
+$app->set('view', function() {
+    $view = new Web\Filesystem\View;
+    $view->path = ABSPATH . '/resources/views/';
     return $view;
 });
 
@@ -35,13 +35,13 @@ $app->set('cache', function(DIContainer $c) {
 });
 
 // Error handler
-$app->set('errors', function() {
-    return new Web\Log\Errors;
+$app->set('error', function() {
+    return new Web\Error\ErrorHandler;
 });
 
 // Database
 $app->set('db', function(DIContainer $c) {
-    return new Web\Database\Database($c->config->db);
+    return new Web\Database\Connection($c->config->db);
 });
 
 // Validator
@@ -60,21 +60,14 @@ $app->set('request', function() {
 });
 
 // Response
-$app->set('response', function() {
-    return new Web\Http\Response;
+$app->set('response', function(DIContainer $c) {
+    $response = new Web\Http\Response;
+    $response->baseUrl = $c->config->get('app.url');
+    return $response;
 });
 
 // Router
 $app->set('router', function(DIContainer $c) {
-    $router = new Web\Router\Router($c->config->get('router'));
+    $router = new Web\Http\Router($c->config->get('router'));
     return $router;
-});
-
-// App
-$app->set('app', function(DIContainer $c) {
-    $app = new Web\MVC\App($c);
-    $app->controller = $c->config->get('router.main_method');
-    $app->namespace = $c->config->get('router.namespaces.controllers');
-    $app->setPath($c->config->get('router.paths.controllers'));
-    return $app;
 });

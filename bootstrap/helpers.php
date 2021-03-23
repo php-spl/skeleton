@@ -55,3 +55,8 @@ function e($string, $escape = true) {
  function dump() {
    return var_dump(func_get_args());
  }
+
+ function dump_halt() {
+  return var_dump(func_get_args());
+  die;
+}

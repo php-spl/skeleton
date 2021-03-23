@@ -19,7 +19,9 @@ return [
         'prefix'    => '',
     ],
     'router' => [
-        'base_folder' => ABSPATH . DIRECTORY_SEPARATOR,
+        'base_folder' => ABSPATH,
+        'query_string' => 'route',
+        'main_controller' => 'index',
         'main_method' => 'index',
         'paths' => [
             'controllers' => 'app/Http/Controllers',
