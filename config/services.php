@@ -56,12 +56,12 @@ $app->set('auth', function(DIContainer $c) {
 
 // Request
 $app->set('request', function() {
-    return new Symfony\Component\HttpFoundation\Request;
+    return new Web\Http\Request;
 });
 
 // Response
 $app->set('response', function() {
-    return new Symfony\Component\HttpFoundation\Response;
+    return new Web\Http\Response;
 });
 
 // Router
@@ -73,7 +73,8 @@ $app->set('router', function(DIContainer $c) {
 // App
 $app->set('app', function(DIContainer $c) {
     $app = new Web\MVC\App($c);
-    $app->controller = 'Home';
-    $app->setPath($c->config->get('app.controllers'));
+    $app->controller = $c->config->get('router.main_method');
+    $app->namespace = $c->config->get('router.namespaces.controllers');
+    $app->setPath($c->config->get('router.paths.controllers'));
     return $app;
 });

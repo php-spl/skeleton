@@ -31,5 +31,5 @@ require_once ABSPATH . '/config/models.php';
 
 require_once ABSPATH . '/bootstrap/functions.php';
 
-require_once ABSPATH . '/routes/web.php';
+require_once ABSPATH . '/routes/main.php';
 

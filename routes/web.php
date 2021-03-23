@@ -1,6 +1,7 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+$app->router->controller('/', IndexController::class, ['name' => 'index']);
 
-$app->router->controller('/index', IndexController::class);
+$app->router->controller('/home', HomeController::class);
+
+$app->router->controller('/posts', PostController::class);

@@ -8,13 +8,6 @@ class IndexController extends Controller
 {
     public function index() 
     {
-        view('home');
+        view('welcome');
     }
-
-    public function getFoo() 
-    {
-        return 'Hello World';
-    }
-
-
 }

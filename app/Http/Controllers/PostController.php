@@ -2,22 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Web\MVC\Controller;
+use Web\Router\Http\Controller;
 
 class PostController extends Controller
 {
-    public function __construct($app)
-    {
-        parent::__construct($app);
-          
-    }
+    /**
+    * @var array Before Middlewares
+    */
+    public $middlewareBefore = [
+        \AuthMiddleware::class
+    ];
+
+    /**
+    * @var array After Middlewares
+    */
+    public $middlewareAfter = [
+        
+    ];
+
 
     public function index() 
     {
         view('home');
     }
 
-    public function create()
+    public function getCreate()
     {
         echo 'created';
     }

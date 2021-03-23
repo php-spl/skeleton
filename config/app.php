@@ -6,7 +6,6 @@ return [
         'key' => '_csrf',
         'path' => ABSPATH,
         'views' => ABSPATH . '/resources/views',
-        'controllers' => ABSPATH . '/app/Controllers/',
         'url' => 'http://localhost/dev/php-web-app'
     ],
     'db' => [
@@ -20,16 +19,16 @@ return [
         'prefix'    => '',
     ],
     'router' => [
-        'base_folder' => ABSPATH,
+        'base_folder' => ABSPATH . DIRECTORY_SEPARATOR,
         'main_method' => 'index',
         'paths' => [
             'controllers' => 'app/Http/Controllers',
             'middlewares' => 'app/Http/Middlewares',
-          ],
-          'namespaces' => [
+        ],
+        'namespaces' => [
             'controllers' => 'App\Http\Controllers',
             'middlewares' => 'App\Http\Middlewares',
-          ]
+        ]
     ],
     'mail' => [
         'host' => 'smtp.mail.com'
