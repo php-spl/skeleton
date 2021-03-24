@@ -50,3 +50,19 @@ require_once ABSPATH . '/config/middlewares.php';
 
 require_once ABSPATH . '/routes/main.php';
 
+/*
+|--------------------------------------------------------------------------
+| Migrate database and seeds
+|--------------------------------------------------------------------------
+|
+| If we have database to migrate, do so.
+|
+*/
+
+if($app->config->get('db.migrate')) {
+    $app->sql->import(ABSPATH . '/database/migrates/' . $app->config->get('db.migrate'), $app->db->pdo);
+}
+
+if($app->config->get('db.seed')) {
+    $app->sql->import(ABSPATH . '/database/seeds/' . $app->config->get('db.seed'), $app->db->pdo);
+}

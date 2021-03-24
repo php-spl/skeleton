@@ -43,6 +43,11 @@ $app->set('db', function(Container $c) {
     return new Web\Database\Connection($c->config->db);
 });
 
+// SQL
+$app->set('sql', function(Container $c) {
+   return new Web\Database\SQL;
+});
+
 // Validator
 $app->set('validator', function(Container $c) {
     return new Web\Security\Validator($c->db, $c->errors);

@@ -12,11 +12,11 @@ class AdminController extends Controller
     public function __construct()
     {
         VerifyCSRF::handle();
-        //Authenticate::handle();
     }
 
     public function index()
-    {        
+    {  
+        Authenticate::handle();      
         view('backend/admin/index');
     }
 

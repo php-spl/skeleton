@@ -18,6 +18,8 @@ return [
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
+        'migrate' => env('migrate', false),
+        'seeds' => env('seeds', false)
     ],
     'alias' => [
         'session' => 'session',
