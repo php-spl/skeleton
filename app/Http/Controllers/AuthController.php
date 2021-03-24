@@ -4,30 +4,14 @@ namespace App\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Http\Middlewares\Authenticate;
-
 class PostController extends Controller
 {
 
     public function __construct()
     {
-        //Authenticate::handle();
+        app()->verifyCSRF;
     }
     
-    /**
-    * @var array Before Middlewares
-    */
-    public $middlewareBefore = [
-        \Authenticate::class
-    ];
-
-    /**
-    * @var array After Middlewares
-    */
-    public $middlewareAfter = [
-        
-    ];
-
 
     public function index() 
     {

@@ -1,5 +1,27 @@
 <?php
 
+function app() {
+  global $app;
+  return $app;
+ }
+
+ function env($key, $default = null) {
+
+  $data = $_ENV;
+  $segments = explode('.', $key);
+  
+  foreach($segments as $segment) {
+    if(isset($data[$segment])) {
+      $data = $data[$segment];
+    } else {
+      $data = $default;
+      break;
+    }
+  }
+  
+  return $data;
+ }
+
 function e($string, $escape = true) {
   if($escape) {
     echo htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
@@ -18,9 +40,9 @@ function e($string, $escape = true) {
   echo $app->config->get('app.url') . $path;
  }
 
- function app() {
+ function router() {
   global $app;
-  return $app;
+  return $app->router;
  }
 
  function layout($include) {
@@ -45,18 +67,20 @@ function e($string, $escape = true) {
 
  function csrf() {
   global $app;
-  echo $app->csrf;
+  $app->csrf->setToken();
+  echo $app->csrf->input();
 }
  
  function redirect($url) {
-   return header('Location: ' . $url);
+  global $app;
+  return header('Location: ' . $app->config->get('app.url') . $url);
  }
 
  function dump() {
    return var_dump(func_get_args());
  }
 
- function dump_halt() {
+ function halt() {
   return var_dump(func_get_args());
   die;
 }

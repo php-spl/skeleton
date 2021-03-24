@@ -1,6 +1,6 @@
 <?php
 
-use Web\DI\DIContainer;
+use Web\DI\Container;
 
 // Config
 $app->set('config', function() {
@@ -10,12 +10,11 @@ $app->set('config', function() {
 });
 
 // Session
-$app->set('session', function() {
-    return new Web\Session\NativeSession;
-});
+$app->set('session', Web\Session\NativeSession::class);
+$app->session->start();
 
 // CSRF
-$app->set('csrf', function(DIContainer $c) {
+$app->set('csrf', function(Container $c) {
    return new Web\Security\CSRF($c->config->get('app.key'));
 });
 
@@ -27,7 +26,7 @@ $app->set('view', function() {
 });
 
 // Cache
-$app->set('cache', function(DIContainer $c) {
+$app->set('cache', function(Container $c) {
     $cache = new Web\Cache\FileCache(ABSPATH . '/storage/cache'); 
     #$cache = new Web\Cache\PDOCache($pdo, "my_cache_table_name");
     #$cache = new Web\Cache\ArrayCache(); 
@@ -40,18 +39,18 @@ $app->set('error', function() {
 });
 
 // Database
-$app->set('db', function(DIContainer $c) {
+$app->set('db', function(Container $c) {
     return new Web\Database\Connection($c->config->db);
 });
 
 // Validator
-$app->set('validator', function(DIContainer $c) {
+$app->set('validator', function(Container $c) {
     return new Web\Security\Validator($c->db, $c->errors);
 });
 
 // Auth
-$app->set('auth', function(DIContainer $c) {
-    return new Web\Security\Auth($c->user);
+$app->set('auth', function(Container $c) {
+    return new Web\Security\Auth($c->User);
 });
 
 // Request
@@ -60,14 +59,13 @@ $app->set('request', function() {
 });
 
 // Response
-$app->set('response', function(DIContainer $c) {
+$app->set('response', function(Container $c) {
     $response = new Web\Http\Response;
     $response->baseUrl = $c->config->get('app.url');
     return $response;
 });
 
 // Router
-$app->set('router', function(DIContainer $c) {
-    $router = new Web\Http\Router($c->config->get('router'));
-    return $router;
+$app->set('router', function() {
+    return new Web\Http\Router;
 });

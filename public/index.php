@@ -23,12 +23,10 @@ require_once ABSPATH . '/bootstrap/app.php';
 |--------------------------------------------------------------------------
 |
 | Once we have the application, we can handle the incoming request using
-| the application's HTTP kernel. Then, we will send the response back
+| the application's HTTP router. Then, we will send the response back
 | to this client's browser, allowing them to enjoy our application.
 |
 */
-
-$app->session->start();
 
 $app->router->run();
 

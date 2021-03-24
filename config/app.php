@@ -2,21 +2,26 @@
 
 return [
     'app' => [
-        'name' => 'App',
-        'key' => '_csrf',
+        'env' => env('app.env', 'development'),
+        'name' => env('app.name', 'App'),
+        'key' => env('app.key', base64_encode('_csrf')),
         'path' => ABSPATH,
         'views' => ABSPATH . '/resources/views',
-        'url' => 'http://localhost/dev/php-web-app'
+        'url' => env('app.url')
     ],
     'db' => [
-        'host' => '127.0.0.1',
-        'driver' => 'mysql',
-        'dbname' => 'web-app',
-        'username' => 'root',
-        'password' => 'mysql',
+        'host' => env('db.host', '127.0.0.1'),
+        'driver' => env('db.driver', 'mysql'),
+        'dbname' => env('db.name', 'web-app'),
+        'username' => env('db.username', 'root'),
+        'password' =>  env('db.password', 'mysql'),
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
+    ],
+    'alias' => [
+        'session' => 'session',
+        ''
     ],
     'router' => [
         'base_folder' => ABSPATH,
@@ -33,6 +38,6 @@ return [
         ]
     ],
     'mail' => [
-        'host' => 'smtp.mail.com'
+        'host' => env('mail.host', 'smtp.mail.com')
     ]
 ];

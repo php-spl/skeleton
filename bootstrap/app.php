@@ -1,7 +1,5 @@
 <?php
 
-use Web\DI\DIContainer;
-
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -13,7 +11,22 @@ use Web\DI\DIContainer;
 |
 */
 
-$app = new DIContainer;
+$app = new Web\DI\Container;
+
+/*
+|--------------------------------------------------------------------------
+| Setup environment
+|--------------------------------------------------------------------------
+|
+| Check if application is in development or production mode.
+|
+*/
+
+$env = ABSPATH . '/env.ini';
+
+if(file_exists($env)) {
+    $_ENV = parse_ini_file($env, true);
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +38,15 @@ $app = new DIContainer;
 |
 */
 
+require_once ABSPATH . '/bootstrap/helpers.php';
+
 require_once ABSPATH . '/config/services.php';
 
 require_once ABSPATH . '/config/models.php';
 
-require_once ABSPATH . '/bootstrap/helpers.php';
+require_once ABSPATH . '/config/controllers.php';
+
+require_once ABSPATH . '/config/middlewares.php';
 
 require_once ABSPATH . '/routes/main.php';
 
