@@ -16,8 +16,8 @@ class AdminController extends Controller
 
     public function index()
     {  
-        Authenticate::handle();      
-        view('backend/admin/index');
+        //Authenticate::handle();      
+        view('backend/admin/dashboard');
     }
 
     public function create()

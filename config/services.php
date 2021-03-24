@@ -43,6 +43,11 @@ $app->set('db', function(Container $c) {
     return new Web\Database\Connection($c->config->db);
 });
 
+// Model
+$app->set('model', function(Container $c) {
+    return new Web\Database\Model($c->db);
+});
+
 // SQL
 $app->set('sql', function(Container $c) {
    return new Web\Database\SQL;
@@ -50,7 +55,7 @@ $app->set('sql', function(Container $c) {
 
 // Validator
 $app->set('validator', function(Container $c) {
-    return new Web\Security\Validator($c->db, $c->errors);
+    return new Web\Security\Validator($c->model, $c->error);
 });
 
 // Auth

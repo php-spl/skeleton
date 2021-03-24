@@ -10,6 +10,10 @@ $app->set('HomeController', function() {
    return new App\Http\Controllers\Frontend\HomeController;
 });
 
+$app->set('AuthController', function() {
+   return new App\Http\Controllers\Frontend\AuthController;
+});
+
 $app->set('PostController', function() {
    return new App\Http\Controllers\Frontend\PostController;
 });

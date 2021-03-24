@@ -55,14 +55,28 @@ function e($string, $escape = true) {
   return $app->config->get($path);
  }
 
+ function request() {
+   global $app;
+   return $app->request;
+ }
+
+ function session() {
+  global $app;
+  return $app->session;
+}
+
  function asset($path = '', $public = '/public/assets/') {
   global $app;
-  return $app->config->get('app.url') . $public . $path;
+  echo $app->config->get('app.url') . $public . $path;
 }
 
  function view($path, $data = []) {
    global $app;
    return $app->view->render($path, $data);
+ }
+
+ function password($password) {
+  return password_hash($password, PASSWORD_DEFAULT);
  }
 
  function csrf() {

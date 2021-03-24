@@ -13,7 +13,7 @@ require 'errors.php';
 
 require 'test.php';
 
-require 'auth.php';
+require 'frontend/auth.php';
 
 require 'frontend/web.php';
 
