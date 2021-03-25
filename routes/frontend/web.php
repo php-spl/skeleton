@@ -1,7 +1,7 @@
 <?php
 
 $app->router->get('/', [
-   'func' => [$app->IndexController, 'index']
+   'func' => [$app->DefaultController, 'index']
 ]);
 
 $app->router->get('/home', [
@@ -18,9 +18,15 @@ $app->router->get('/post/create', [
    'func' => [$app->PostController, 'create']
 ]);
 
-$app->router->post('/post', [
+$app->router->post('/post/create', [
    'func' => [$app->PostController, 'store']
 ]);
+
+$app->router->get('/post/{id}', [
+   'func' => [$app->PostController, 'show'],
+   'parameters' => [$id]
+]);
+
 
 $app->router->get('/app', function(){
    dump(app());

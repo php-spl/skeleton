@@ -5,6 +5,16 @@ function app() {
   return $app;
  }
 
+ function db($model = null) {
+  global $app;
+  if($model) {
+    return $app->{$model};
+  } else {
+    return $app->model;
+  }
+  
+ }
+
  function env($key, $default = null) {
 
   $data = $_ENV;
@@ -63,6 +73,13 @@ function e($string, $escape = true) {
  function session() {
   global $app;
   return $app->session;
+}
+
+function auth() {
+  global $app;
+  if($app->Authenticate) {
+    return $app->auth;
+  }
 }
 
  function asset($path = '', $public = '/public/assets/') {

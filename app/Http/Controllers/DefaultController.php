@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Web\Http\Controller;
 
-class IndexController extends Controller
+class DefaultController extends Controller
 {
     public function index() 
     {

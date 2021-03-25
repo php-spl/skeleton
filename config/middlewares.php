@@ -3,9 +3,9 @@
 use Web\DI\Container;
 
 $app->set('Authenticate', function() {
-   return new App\Http\Middlewares\Authenticate;
+   return App\Http\Middlewares\Authenticate::handle();
 });
 
 $app->set('VerifyCSRF', function() {
-    return new App\Http\Middlewares\VerifyCSRF;
+    return App\Http\Middlewares\VerifyCSRF::handle();
  });

@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Web\Http\Controller;
 
 use App\Http\Middlewares\VerifyCSRF;
-use App\Http\Middlewares\Authenticate;
 
-class AdminController extends Controller
+class AdminController
 {
     public function __construct()
     {
@@ -16,12 +15,13 @@ class AdminController extends Controller
 
     public function index()
     {  
-        //Authenticate::handle();      
+        auth();  
+        
         view('backend/admin/dashboard');
     }
 
-    public function create()
+    public function create($type)
     {
-        echo $_GET['type'];
+        echo $type;
     }
 }

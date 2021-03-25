@@ -4,10 +4,10 @@ $app->router->get('/login', [
     'func' => [$app->AuthController, 'index']
  ]);
 
- $app->router->get('/register', [
+ $app->router->get('/signup', [
     'func' => [$app->AuthController, 'create']
  ]);
 
- $app->router->post('/register', [
+ $app->router->post('/signup', [
     'func' => [$app->AuthController, 'store']
  ]);

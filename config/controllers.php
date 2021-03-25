@@ -2,8 +2,8 @@
 
 use Web\DI\Container;
 
-$app->set('IndexController', function() {
-   return new App\Http\Controllers\IndexController;
+$app->set('DefaultController', function() {
+   return new App\Http\Controllers\DefaultController;
 });
 
 $app->set('HomeController', function() {

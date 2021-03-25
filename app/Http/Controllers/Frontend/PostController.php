@@ -16,7 +16,7 @@ class PostController extends Controller
     
     public function index() 
     {
-        $posts = app()->Post->select()->get();
+        $posts = app()->Post->select();
 
         view('frontend/posts/index', [
             'posts' => $posts
@@ -35,7 +35,11 @@ class PostController extends Controller
 
     public function show($id)
     {
-        echo $id;
+        $post = db('Post')->where('id', $id)->select()->first();
+
+        view('frontend/posts/show', [
+            'post' => $post
+        ]);
     }
 
     public function edit($id)

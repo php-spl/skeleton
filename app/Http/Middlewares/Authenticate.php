@@ -12,7 +12,7 @@ class Authenticate extends Middleware
       return true;
     }
 
-    if (!app()->session->get('auth')) {
+    if (!app()->session->get('user')) {
      return redirect('/');
     }
 
