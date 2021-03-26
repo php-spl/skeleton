@@ -59,10 +59,11 @@ require_once ABSPATH . '/routes/main.php';
 |
 */
 
-if($app->config->get('db.migrate')) {
-    $app->sql->import(ABSPATH . '/database/migrates/' . $app->config->get('db.migrate'), $app->db->pdo);
+
+if(null != config('db.migrate')) {
+    $app->sql->import(ABSPATH . '/database/migrations/' . $app->config->get('db.migrate'), $app->db->pdo);
 }
 
-if($app->config->get('db.seed')) {
+if(null != config('db.seed')) {
     $app->sql->import(ABSPATH . '/database/seeds/' . $app->config->get('db.seed'), $app->db->pdo);
 }

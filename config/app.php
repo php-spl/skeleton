@@ -17,9 +17,9 @@ return [
         'password' =>  env('db.password', 'mysql'),
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-        'migrate' => env('migrate', false),
-        'seeds' => env('seeds', false)
+        'prefix'    => env('db.prefix', ''),
+        'migrate' => env('db.migrate', false),
+        'seed' => env('db.seed', false)
     ],
     'alias' => [
         'session' => 'session',

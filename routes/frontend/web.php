@@ -24,7 +24,7 @@ $app->router->post('/post/create', [
 
 $app->router->get('/post/{id}', [
    'func' => [$app->PostController, 'show'],
-   'parameters' => [$id]
+   'parameters' => ['id' => $id]
 ]);
 
 

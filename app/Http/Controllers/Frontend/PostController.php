@@ -35,7 +35,10 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = db('Post')->where('id', $id)->select()->first();
+        halt($id);
+        $post = db('Post')->select('users.*', 'posts.*')->join('users')->on('posts.user_id', 'users.id')->where('posts.id', $id)->execute();
+
+        //halt($post);
 
         view('frontend/posts/show', [
             'post' => $post
