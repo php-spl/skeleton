@@ -26,9 +26,9 @@ SET time_zone = "+00:00";
 -- Data dump for tabellen `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `body`, `created`) VALUES
-(1, 'Test', 'This is a test', '2021-03-24 12:51:38'),
-(2, 'Test 2', 'This is a test 2', '2021-03-24 12:51:42');
+INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `created`) VALUES
+(1, 1, 'Test', 'This is a test', '2021-03-24 12:51:38'),
+(2, 2, 'Test 2', 'This is a test 2', '2021-03-24 12:51:42');
 
 --
 -- Data dump for tabellen `users`
