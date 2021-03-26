@@ -18,6 +18,7 @@ return [
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
+        'namespace' => 'App\Models',
         'migrate' => env('migrate', false),
         'seeds' => env('seeds', false)
     ],
@@ -25,18 +26,12 @@ return [
         'session' => 'session',
         ''
     ],
-    'router' => [
-        'base_folder' => ABSPATH,
-        'query_string' => 'route',
-        'main_controller' => 'index',
+    'http' => [
+        'main_controller' => 'default',
         'main_method' => 'index',
-        'paths' => [
-            'controllers' => 'app/Http/Controllers',
-            'middlewares' => 'app/Http/Middlewares',
-        ],
         'namespaces' => [
             'controllers' => 'App\Http\Controllers',
-            'middlewares' => 'App\Http\Middlewares',
+            'middlewares' => 'App\Http\Middlewares'
         ]
     ],
     'mail' => [

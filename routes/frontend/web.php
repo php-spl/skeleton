@@ -1,33 +1,31 @@
 <?php
 
-$app->router->get('/', [
-   'func' => [$app->DefaultController, 'index']
-]);
+router()->get('/', function() {
+   return controller('Default')->index();
+});
 
-$app->router->get('/home', [
-   'func' => [$app->HomeController, 'index']
-]);
+router()->get('/home', function() {
+   return controller(Home::class)->index();
+ });
 
 
 // Posts
-$app->router->get('/posts', [
-   'func' => [$app->PostController, 'index']
-]);
+router()->get('/posts', function() {
+   return controller(Frontend\Post::class)->index();
+ });
 
-$app->router->get('/post/create', [
-   'func' => [$app->PostController, 'create']
-]);
+router()->get('/post/{id}', function($id) {
+   return controller(Frontend\Post::class)->show($id);
+  });
 
-$app->router->post('/post/create', [
-   'func' => [$app->PostController, 'store']
-]);
+router()->get('/post/create', function() {
+   return controller(Frontend\Post::class)->create();
+ });
 
-$app->router->get('/post/{id}', [
-   'func' => [$app->PostController, 'show'],
-   'parameters' => [$id]
-]);
+router()->post('/post/create', function() {
+   return controller(Frontend\Post::class)->store();
+ });
 
-
-$app->router->get('/app', function(){
+router()->get('/app', function(){
    dump(app());
 });

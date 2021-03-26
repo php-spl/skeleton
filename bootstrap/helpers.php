@@ -1,19 +1,39 @@
 <?php
 
-function app() {
+function app($container = null) {
   global $app;
-  return $app;
+  if($container) {
+    return $app->{$container};
+  } else {
+    return $app;
+  }
  }
 
- function db($model = null) {
-  global $app;
-  if($model) {
-    return $app->{$model};
-  } else {
-    return $app->model;
+ function controller($name) {
+  if($name) {
+    $controller = config('http.namespaces.controllers') . DIRECTORY_SEPARATOR . $name . 'Controller';
+    return new $controller;
   }
-  
  }
+
+ function db() {
+  return app()->db;
+ }
+
+ function model($name = null) {
+  if(app()->has($name)) {
+    return app()->{$name};
+  } else {
+    $model = config('db.namespace') . DIRECTORY_SEPARATOR . $name;
+    return new $model(db());
+  }
+  return app()->model;
+ }
+
+ function sql() {
+  return app()->sql;
+ }
+
 
  function env($key, $default = null) {
 
@@ -46,50 +66,45 @@ function e($string, $escape = true) {
  }
 
  function url($path = '') {
-  global $app;
-  echo $app->config->get('app.url') . $path;
+  echo config('app.url') . $path;
  }
 
  function router() {
-  global $app;
-  return $app->router;
+  return app()->router;
  }
 
  function layout($include) {
-  global $app;
-  include_once $app->config->get('app.views') . '/layouts/' . $include . '.php';
+  include_once config('app.views') . '/layouts/' . $include . '.php';
  }
 
  function config($path) {
-  global $app;
-  return $app->config->get($path);
+  return app()->config->get($path);
  }
 
  function request() {
-   global $app;
-   return $app->request;
+   return app()->request;
  }
 
  function session() {
-  global $app;
-  return $app->session;
+  return app()->session;
+}
+
+function user() {
+  return app()->User;
 }
 
 function auth() {
-  global $app;
-  if($app->Authenticate) {
-    return $app->auth;
+  if(app()->Authenticate) {
+    return app()->auth;
   }
 }
 
  function asset($path = '', $public = '/public/assets/') {
-  global $app;
-  echo $app->config->get('app.url') . $public . $path;
+  echo config('app.url') . $public . $path;
 }
 
  function view($path, $data = []) {
-   global $app;
-   return $app->view->render($path, $data);
+   return app()->view->render($path, $data);
  }
 
  function password($password) {
@@ -97,14 +112,12 @@ function auth() {
  }
 
  function csrf() {
-  global $app;
-  $app->csrf->setToken();
-  echo $app->csrf->input();
+  app()->csrf->setToken();
+  echo app()->csrf->input();
 }
  
  function redirect($url) {
-  global $app;
-  return header('Location: ' . $app->config->get('app.url') . $url);
+  return header('Location: ' . config('app.url') . $url);
  }
 
  function dump() {
