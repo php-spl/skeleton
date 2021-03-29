@@ -1,5 +1,5 @@
 <?php
 
-$app->router->get('/test/app', function(){
+router()->get('/test/app', function(){
    dump(app());
 });

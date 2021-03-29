@@ -1,5 +1,5 @@
 <?php
 
-$app->router->error(function(){
+router()->error(function(){
 	view('errors/404');
 });

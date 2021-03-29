@@ -1,19 +1,20 @@
 <?php
 
-$app->router->get('/admin', [
-   'func' => [$app->AdminController, 'index']
-]);
+router()->get('/admin', function() {
+   return controller('Backend\Admin')->index();
+ });
 
 // Posts
-$app->router->get('/admin/posts', [
-   'func' => [$app->PostController, 'index']
-]);
+router()->get('/admin/posts', function() {
+   return controller('Backend\Post')->index();
+ });
 
-$app->router->get('/admin/post/create', [
-   'func' => [$app->PostController, 'create']
-]);
+ router()->get('/admin/post/create', function() {
+   return controller('Backend\Post')->create();
+ });
 
-$app->router->post('/admin/post', [
-   'func' => [$app->PostController, 'store']
-]);
+ router()->post('/admin/post', function() {
+   return controller('Backend\Post')->store();
+ });
+
 

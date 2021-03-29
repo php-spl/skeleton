@@ -1,7 +1,7 @@
-<?php layout('frontend/auth/header') ?>
-
+<?php layout('auth/header') ?>
+<?php component('errors/messages') ?>
 <main class="form-signin">
-  <form>
+  <form method="post" action="<?php url('/login'); ?>">
     <h1 class="h3 mb-3 fw-normal">Login</h1>
 
     <div class="form-floating">
@@ -24,4 +24,4 @@
   </form>
 </main>
 
-<?php layout('frontend/auth/footer') ?>
+<?php layout('auth/footer') ?>

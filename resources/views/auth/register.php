@@ -1,5 +1,5 @@
-<?php layout('frontend/auth/header') ?>
-
+<?php layout('auth/header') ?>
+<?php component('errors/messages') ?>
 <main class="form-signin">
   <form method="post" action="<?php url('/register'); ?>">
     <h1 class="h3 mb-3 fw-normal">Register</h1>
@@ -19,4 +19,4 @@
   </form>
 </main>
 
-<?php layout('frontend/auth/footer') ?>
+<?php layout('auth/footer') ?>

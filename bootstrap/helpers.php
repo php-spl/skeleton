@@ -9,6 +9,10 @@ function app($container = null) {
   }
  }
 
+ function validate($src, $rules) {
+   return app()->validator->validate($src, $rules);
+ }
+
  function controller($name) {
   if($name) {
     $controller = config('http.namespaces.controllers') . DIRECTORY_SEPARATOR . $name . 'Controller';
@@ -75,6 +79,10 @@ function e($string, $escape = true) {
 
  function layout($include) {
   include_once config('app.views') . '/layouts/' . $include . '.php';
+ }
+
+ function component($include) {
+  include_once config('app.views') . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
  function config($path) {
