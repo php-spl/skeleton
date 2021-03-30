@@ -6,7 +6,7 @@ use Web\Http\Controller;
 
 use App\Http\Middlewares\VerifyCSRF;
 
-class AdminController
+class AdminController extends Controller
 {
     public function __construct()
     {

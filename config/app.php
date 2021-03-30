@@ -4,7 +4,7 @@ return [
     'app' => [
         'env' => env('app.env', 'development'),
         'name' => env('app.name', 'App'),
-        'key' => env('app.key', base64_encode('_csrf')),
+        'key' => env('app.key', base64_encode(uniqid())),
         'path' => ABSPATH,
         'views' => ABSPATH . '/resources/views',
         'url' => env('app.url')

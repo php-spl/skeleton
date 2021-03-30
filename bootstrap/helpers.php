@@ -120,8 +120,11 @@ function auth() {
  }
 
  function csrf() {
-  app()->csrf->setToken();
-  echo app()->csrf->input();
+  if(app()->has('csrf')) {
+    app()->csrf->setToken();
+    echo app()->csrf->input();
+  }
+
 }
  
  function redirect($url) {

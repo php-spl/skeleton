@@ -1,31 +1,32 @@
 <?php
 
+use App\Http\Middlewares\{VerifyCSRF, Authenticate};
+
 router()->get('/', function() {
    return controller('Default')->index();
 });
 
 router()->get('/home', function() {
-   return controller(Home::class)->index();
+   return controller(Frontend\Home::class)->index();
  });
 
 
 // Posts
 router()->get('/posts', function() {
-   return controller(Frontend\Post::class)->index();
+   return controller(Post::class)->index();
  });
 
+ router()->post('/post/store', function() {
+  VerifyCSRF::handle();
+  return controller(Post::class)->store();
+});
+
+ router()->get('/post/create', function() {
+    Authenticate::handle();
+   return controller(Post::class)->create();
+ });
+ 
 router()->get('/post/{id}', function($id) {
-   return controller(Frontend\Post::class)->show($id);
+   return controller(Post::class)->show($id);
   });
 
-router()->get('/post/create', function() {
-   return controller(Frontend\Post::class)->create();
- });
-
-router()->post('/post/create', function() {
-   return controller(Frontend\Post::class)->store();
- });
-
-router()->get('/app', function(){
-   dump(app());
-});
