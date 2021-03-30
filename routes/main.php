@@ -15,6 +15,8 @@ require 'test.php';
 
 require 'auth.php';
 
+require 'api.php';
+
 require 'frontend/web.php';
 
 require 'backend/web.php';

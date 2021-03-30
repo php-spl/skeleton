@@ -17,7 +17,6 @@ router()->get('/posts', function() {
  });
 
  router()->post('/post/store', function() {
-  VerifyCSRF::handle();
   return controller(Post::class)->store();
 });
 

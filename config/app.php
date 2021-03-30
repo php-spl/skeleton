@@ -7,6 +7,7 @@ return [
         'key' => env('app.key', base64_encode(uniqid())),
         'path' => ABSPATH,
         'views' => ABSPATH . '/resources/views',
+        'layouts' => ABSPATH . '/resources/views/layouts',
         'url' => env('app.url')
     ],
     'db' => [

@@ -1,5 +1,5 @@
-<?php layout('frontend/app/header') ?>
+<?php include layout('frontend/app/header') ?>
 
 <h1>Welcome</h1>
 
-<?php layout('frontend/app/footer') ?>
+<?php include layout('frontend/app/footer') ?>

@@ -78,11 +78,11 @@ function e($string, $escape = true) {
  }
 
  function layout($include) {
-  include_once config('app.views') . '/layouts/' . $include . '.php';
+  return config('app.layouts') . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
  function component($include) {
-  include_once config('app.views') . DIRECTORY_SEPARATOR . $include . '.php';
+ return config('app.views') . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
  function config($path) {

@@ -8,6 +8,8 @@ class DefaultController extends Controller
 {
     public function index() 
     {
-        view('frontend/welcome');
+        view('frontend/welcome', [
+            'title' => 'Hello World!'
+        ]);
     }
 }

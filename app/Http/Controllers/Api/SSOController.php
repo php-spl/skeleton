@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Web\Http\Controller;
 use App\Http\Middlewares\VerifyCSRF;
 
-class AuthController extends Controller
+class SSOController extends Controller
 {
     public $url = [
-        'login' => '/login',
-        'register' => '/register',
-        'profile' => '/profile'
+        'login' => '/auth/sso/broker',
+        'register' => '/register'
     ];
 
     public function __construct()
@@ -18,18 +17,18 @@ class AuthController extends Controller
        VerifyCSRF::handle();
     }
     
-    public function index() 
+    public function broker() 
     {
-        view('auth/login');
+        view('auth/sso/broker', [
+            'title' => 'SSO'
+        ]);
     }
 
-    public function login() 
+    public function idp() 
     {
        $v = validate($_POST, [
-            'email' => [
-                'required' => true,
-                'max' => 50,
-                'email' => true
+            'username' => [
+                'required' => true
             ],
             'password' => [
                 'required' => true
@@ -38,17 +37,37 @@ class AuthController extends Controller
 
         if(!$v->fails()) {
            $auth = auth()->attempt(
-                request()->get('email'),
+                request()->get('username'),
                 request()->get('password')
             );
 
-            if($auth) {
-               return redirect($this->url['profile']);
+            $src = request()->get('src');
+            $host = $this->validateHost($src);
+
+            if($auth && $host) {
+                // Generate signature from authentication info + secret key
+                $user_id = auth()->id;
+                $user_name = auth()->username;
+                $key = config('app.key');
+
+                $sig = hash(
+                    'sha256',
+                    $user_id . $user_name . $key
+                );
+
+               return redirect($src . "?user_id={$user_id}&user_name={$user_name}&sig={$sig}");
             } else {
-                session()->set('errors', $v->errors()->get());
-                return redirect($this->url['login']);
+                return redirect($src . '?error=1');
             }
+        } else {
+            session()->set('errors', $v->errors()->get());
+            return redirect($this->url['login']);
         }
+    }
+
+    protected function validateHost($request)
+    {
+
     }
 
     public function create()

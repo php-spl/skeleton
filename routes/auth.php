@@ -1,9 +1,9 @@
 <?php
 
+// Normal auth
 router()->get('/profile', function() {
    return controller('Auth')->profile();
 });
-
 
 router()->get('/login', function() {
    return controller('Auth')->index();
@@ -22,3 +22,4 @@ router()->get('/register', function() {
 router()->post('/register', function() {
    return controller('Auth')->store();
 });
+

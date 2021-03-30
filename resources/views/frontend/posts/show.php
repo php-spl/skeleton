@@ -1,4 +1,4 @@
-<?php layout('frontend/blog/header') ?>
+<?php include layout('frontend/blog/header') ?>
 
 <main class="container">
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
@@ -57,4 +57,4 @@
 
 </main><!-- /.container -->
 
-<?php layout('frontend/blog/footer') ?>
+<?php include layout('frontend/blog/footer') ?>
