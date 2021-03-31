@@ -10,8 +10,12 @@ router()->get('/login', function() {
 });
 
 router()->post('/login', function() {
-   auth();
    return controller('Auth')->login();
+});
+
+router()->get('/logout', function() {
+   auth()->logout();
+   redirect('/login');
 });
 
 

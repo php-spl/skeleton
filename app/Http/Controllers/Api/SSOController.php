@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use Web\Http\Controller;
 use App\Http\Middlewares\VerifyCSRF;
+use Web\Security\Hash;
 
 class SSOController extends Controller
 {
     public $url = [
-        'login' => '/auth/sso/broker',
+        'login' => '/login/broker',
         'register' => '/register'
     ];
 
@@ -19,13 +20,21 @@ class SSOController extends Controller
     
     public function broker() 
     {
-        view('auth/sso/broker', [
-            'title' => 'SSO'
+        view('auth/broker', [
+            'title' => 'SSO Login'
         ]);
     }
 
     public function idp() 
     {
+
+        $auth = auth()->attempt(
+            request()->get('username'),
+            request()->get('password')
+        );
+
+
+
        $v = validate($_POST, [
             'username' => [
                 'required' => true
@@ -41,23 +50,19 @@ class SSOController extends Controller
                 request()->get('password')
             );
 
-            $src = request()->get('src');
-            $host = $this->validateHost($src);
+            $host = $this->validateHost(request()->get('host'));
 
             if($auth && $host) {
                 // Generate signature from authentication info + secret key
-                $user_id = auth()->id;
+                $user_id = user()->id;
                 $user_name = auth()->username;
                 $key = config('app.key');
 
-                $sig = hash(
-                    'sha256',
-                    $user_id . $user_name . $key
-                );
+                $sig = Hash::make($user_id . $user_name, $key);
 
-               return redirect($src . "?user_id={$user_id}&user_name={$user_name}&sig={$sig}");
+               return redirect($host . "?user_id={$user_id}&user_name={$user_name}&sig={$sig}");
             } else {
-                return redirect($src . '?error=1');
+                return redirect($host . '?error=1');
             }
         } else {
             session()->set('errors', $v->errors()->get());
@@ -65,9 +70,9 @@ class SSOController extends Controller
         }
     }
 
-    protected function validateHost($request)
+    protected function validateHost($host)
     {
-
+        return model('Host')->select()->where('host', $host)->count();
     }
 
     public function create()

@@ -25,13 +25,16 @@ function app($container = null) {
  }
 
  function model($name = null) {
-  if(app()->has($name)) {
-    return app()->{$name};
-  } else {
+  if($name) {
     $model = config('db.namespace') . DIRECTORY_SEPARATOR . $name;
     return new $model(db());
   }
-  return app()->model;
+  if(app()->has($name)) {
+    return app()->{$name};
+  } else {
+    return app()->model;
+  }
+  
  }
 
  function sql() {
@@ -97,14 +100,9 @@ function e($string, $escape = true) {
   return app()->session;
 }
 
-function user() {
-  return app()->User;
-}
 
 function auth() {
-  if(app()->Authenticate) {
-    return app()->auth;
-  }
+  return app()->auth;
 }
 
  function asset($path = '', $public = '/public/assets/') {

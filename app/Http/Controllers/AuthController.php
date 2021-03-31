@@ -63,7 +63,6 @@ class AuthController extends Controller
                 'required' => true,
                 'max' => 50,
                 'email' => true,
-                'alnum' => true,
                 'unique' => 'users'
             ],
             'password' => [
@@ -74,10 +73,10 @@ class AuthController extends Controller
 
         if(!$v->fails()) {
            $user = model('User')->insert([
-                'username' => request()->get('email'),
+                'username' => explode('@', request()->get('email'))[0],
                 'email' => request()->get('email'),
                 'password' => password(request()->get('password'))
-            ]);
+            ])->save();
     
             if($user) {
                 session()->set('success', 'User created');
@@ -118,7 +117,7 @@ class AuthController extends Controller
 
     public function profile() 
     {
-        view('auth/profile');
+        view('backend/profile');
     }
 
 }

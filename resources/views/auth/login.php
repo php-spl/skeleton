@@ -1,6 +1,6 @@
-<?php layout('auth/header') ?>
-<?php component('errors/messages') ?>
+<?php include layout('auth/header') ?>
 <main class="form-signin">
+<?php component('errors/messages') ?>
   <form method="post" action="<?php url('/login'); ?>">
     <h1 class="h3 mb-3 fw-normal">Login</h1>
 
@@ -19,9 +19,10 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-    <a href="<?php url('/register') ?>">Register</a>
+    <a href="<?php url('/register') ?>">Register</a><br>
+    <a href="<?php url('/login/broker') ?>?host=localhost">SSO login</a>
     <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
   </form>
 </main>
 
-<?php layout('auth/footer') ?>
+<?php include layout('auth/footer') ?>

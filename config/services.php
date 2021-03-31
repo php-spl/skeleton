@@ -63,6 +63,11 @@ $app->set('auth', function(Container $c) {
     return new Web\Security\Auth($c->User);
 });
 
+// Hash
+$app->set('hash', function(Container $c) {
+    return new Web\Security\Hash;
+});
+
 // Request
 $app->set('request', function() {
     return new Web\Http\Request;

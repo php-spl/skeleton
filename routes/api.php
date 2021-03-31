@@ -1,10 +1,10 @@
 <?php
 
 // SSO auth
-router()->get('/auth/sso/broker', function() {
+router()->get('/login/broker', function() {
     return controller(Api\SSO::class)->broker();
 });
 
-router()->post('/auth/sso/idp', function() {
+router()->post('/login/idp', function() {
     return controller(Api\SSO::class)->idp();
 });
