@@ -5,7 +5,7 @@
     <div class="col-md-6 px-0">
       <h1 class="display-4 fst-italic"><?php e($posts->first()->title) ?></h1>
       <p class="lead my-3"><?php e($posts->first()->body) ?></p>
-      <p class="lead mb-0"><a href="<?php url('/post/' . $posts->first()->id) ?>" class="text-white fw-bold">Continue reading...</a></p>
+      <p class="lead mb-0"><a href="<?php route('post.show', ['id' => $posts->first()->id]) ?>" class="text-white fw-bold">Continue reading...</a></p>
     </div>
   </div>
 

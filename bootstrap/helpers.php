@@ -68,12 +68,16 @@ function e($string, $escape = true) {
  
  }
 
- function __() {
-   
+ function __($string, $params = []) {
+   echo app()->translator->get($string, $params);
  }
 
  function url($path = '') {
   echo config('app.url') . $path;
+ }
+
+ function route($name, $params = []) {
+  echo app()->router->link($name, $params);
  }
 
  function router() {
@@ -91,6 +95,10 @@ function e($string, $escape = true) {
  function config($path) {
   return app()->config->get($path);
  }
+
+ function response() {
+  return app()->response;
+}
 
  function request() {
    return app()->request;
@@ -126,7 +134,7 @@ function auth() {
 }
  
  function redirect($url) {
-  return header('Location: ' . config('app.url') . $url);
+  return app()->router->redirect($url);
  }
 
  function dump() {

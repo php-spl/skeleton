@@ -4,9 +4,17 @@ use Web\DI\Container;
 
 // Config
 $app->set('config', function() {
-    $config = new Web\Config\Config;
+    $config = new Web\Env\Config;
     $config->load(ABSPATH . '/config/app.php');
     return $config;
+});
+
+// Translator
+$app->set('translator', function() {
+    $translator = new Web\Env\Translator;
+    $translator->setDefaultLanguage('en-US');
+    $translator->setLocalesDir(ABSPATH . '/ressources/locales');
+    return $translator;
 });
 
 // Session
@@ -82,5 +90,7 @@ $app->set('response', function(Container $c) {
 
 // Router
 $app->set('router', function() {
-    return new Web\Http\Router;
+    $router = new Web\Http\Router;
+    $router->setup(config('app.url'));
+    return $router;
 });

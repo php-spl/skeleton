@@ -1,6 +1,6 @@
 <?php include layout('frontend/blog/header') ?>
 <?php include component('errors/messages') ?>
-    <form action="<?php url('/post/store'); ?>" method="post">
+    <form action="<?php route('post.store') ?>" method="post">
     <label for="title">Title</label><br>
     <input type="text" name="title" id="title">
     <br>

@@ -1,7 +1,7 @@
 <?php include layout('auth/header') ?>
 <?php include component('errors/messages') ?>
 <main class="form-signin">
-  <form method="post" action="<?php url('/register'); ?>">
+  <form method="post" action="<?php route('register') ?>">
     <h1 class="h3 mb-3 fw-normal">Register</h1>
 
     <div class="form-floating">

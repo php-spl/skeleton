@@ -1,5 +1,6 @@
 <?php
 
-router()->get('/test/app', function(){
-   dump(app());
-});
+router()->get('/test', function(){
+   echo 'Hello World';
+})->name('test');
+

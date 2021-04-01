@@ -1,7 +1,7 @@
 <?php include layout('auth/header') ?>
 <main class="form-signin">
 <?php component('errors/messages') ?>
-  <form method="post" action="<?php url('/login'); ?>">
+  <form method="post" action="<?php route('login') ?>">
     <h1 class="h3 mb-3 fw-normal">Login</h1>
 
     <div class="form-floating">

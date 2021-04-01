@@ -1,7 +1,7 @@
 <?php include layout('auth/header') ?>
 <main class="form-signin">
 <?php include component('errors/messages') ?>
-  <form method="post" action="<?php url('/login/idp'); ?>">
+  <form method="post" action="<?php route('login.idp') ?>">
     <h1 class="h3 mb-3 fw-normal">SSO Login</h1>
 
     <div class="form-floating">

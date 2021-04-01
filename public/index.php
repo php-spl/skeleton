@@ -28,5 +28,6 @@ require_once ABSPATH . '/bootstrap/app.php';
 |
 */
 
-$app->router->run();
+app('router')->run();
+
 
