@@ -8,7 +8,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        view('frontend/home', [
+        view('page/welcome', [
             'title' => 'Home'
         ]);
     }

@@ -17,6 +17,9 @@ $app->set('translator', function() {
     return $translator;
 });
 
+// Cookie
+$app->set('cookie', Web\Session\Cookie::class);
+
 // Session
 $app->set('session', Web\Session\NativeSession::class);
 $app->session->start();
@@ -68,7 +71,11 @@ $app->set('validator', function(Container $c) {
 
 // Auth
 $app->set('auth', function(Container $c) {
-    return new Web\Security\Auth($c->User);
+    return new Web\Security\Auth(
+        $c->User,
+        $c->session,
+        $c->cookie
+    );
 });
 
 // Hash

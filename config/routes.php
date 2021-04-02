@@ -1,5 +1,7 @@
 <?php
 
+require ABSPATH . '/src/Error/error.routes.php';
+
 require ABSPATH . '/src/Page/page.routes.php';
 
 require ABSPATH . '/src/Post/post.routes.php';

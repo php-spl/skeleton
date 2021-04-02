@@ -52,6 +52,22 @@ require_once ABSPATH . '/config/routes.php';
 
 /*
 |--------------------------------------------------------------------------
+| Debug and error reporting
+|--------------------------------------------------------------------------
+|
+| Check if development environment
+|
+*/
+if(config('app.env') === 'devlopment') {
+    ini_set('display_errors', 'On');
+    error_reporting(E_ALL ^ E_NOTICE);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
+
+/*
+|--------------------------------------------------------------------------
 | Migrate database and seeds
 |--------------------------------------------------------------------------
 |
