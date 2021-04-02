@@ -1,6 +1,6 @@
 <?php
 
-use Web\DI\Container;
+use Web\App\Container;
 
 $app->set('User', function(Container $c) {
    return new App\Models\User($c->db);

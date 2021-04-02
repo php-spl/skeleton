@@ -1,6 +1,6 @@
 <?php
 
-use Web\DI\Container;
+use Web\App\Container;
 
 $app->set('DefaultController', function() {
    return new App\Http\Controllers\DefaultController;

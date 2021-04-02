@@ -31,8 +31,8 @@ return [
         'main_controller' => 'default',
         'main_method' => 'index',
         'namespaces' => [
-            'controllers' => 'App\Http\Controllers',
-            'middlewares' => 'App\Http\Middlewares'
+            'controllers' => 'App',
+            'middlewares' => 'App\Middleware'
         ]
     ],
     'mail' => [

@@ -1,6 +1,6 @@
 <?php
 
-use Web\DI\Container;
+use Web\App\Container;
 
 $app->set('Authenticate', function() {
    return App\Http\Middlewares\Authenticate::handle();

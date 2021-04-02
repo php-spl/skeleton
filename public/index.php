@@ -15,7 +15,7 @@ define('ABSPATH', dirname(__DIR__));
 
 require_once ABSPATH . '/vendor/autoload.php';
 
-require_once ABSPATH . '/bootstrap/app.php';
+require_once ABSPATH . '/config/bootstrap.php';
 
 /*
 |--------------------------------------------------------------------------
