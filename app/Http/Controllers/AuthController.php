@@ -7,11 +7,6 @@ use App\Http\Middlewares\VerifyCSRF;
 
 class AuthController extends Controller
 {
-    public $url = [
-        'login' => '/login',
-        'register' => '/register',
-        'profile' => '/profile'
-    ];
 
     public function __construct()
     {
@@ -43,10 +38,10 @@ class AuthController extends Controller
             );
 
             if($auth) {
-               return redirect($this->url['profile']);
+               return redirect('profile');
             } else {
                 session()->set('errors', $v->errors()->get());
-                return redirect($this->url['login']);
+                return redirect('login');
             }
         }
     }
@@ -81,12 +76,12 @@ class AuthController extends Controller
             if($user) {
                 session()->set('success', 'User created');
                 session()->set('user', $user);
-                return redirect($this->url['profile']);
+                return redirect('profile');
             }
 
         } else {
             session()->set('errors', $v->errors()->get());
-            return redirect($this->url['register']);
+            return redirect('register');
         }
     }
 

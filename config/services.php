@@ -1,19 +1,19 @@
 <?php
 
-use Web\DI\Container;
+use Web\App\Container;
 
 // Config
 $app->set('config', function() {
-    $config = new Web\Env\Config;
+    $config = new Web\App\Config;
     $config->load(ABSPATH . '/config/app.php');
     return $config;
 });
 
 // Translator
 $app->set('translator', function() {
-    $translator = new Web\Env\Translator;
+    $translator = new Web\App\Translator;
+    $translator->setLocalesDir(ABSPATH . '/resources/locales');
     $translator->setDefaultLanguage('en-US');
-    $translator->setLocalesDir(ABSPATH . '/ressources/locales');
     return $translator;
 });
 

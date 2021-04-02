@@ -8,10 +8,6 @@ use Web\Security\Hash;
 
 class SSOController extends Controller
 {
-    public $url = [
-        'login' => '/login/broker',
-        'register' => '/register'
-    ];
 
     public function __construct()
     {
@@ -54,7 +50,7 @@ class SSOController extends Controller
 
             if($auth && $host) {
                 // Generate signature from authentication info + secret key
-                $user_id = user()->id;
+                $user_id = auth()->id;
                 $user_name = auth()->username;
                 $key = config('app.key');
 
@@ -66,7 +62,7 @@ class SSOController extends Controller
             }
         } else {
             session()->set('errors', $v->errors()->get());
-            return redirect($this->url['login']);
+            return redirect('login');
         }
     }
 
@@ -106,12 +102,12 @@ class SSOController extends Controller
             if($user) {
                 session()->set('success', 'User created');
                 session()->set('user', $user);
-                return redirect($this->url['profile']);
+                return redirect('profile');
             }
 
         } else {
             session()->set('errors', $v->errors()->get());
-            return redirect($this->url['register']);
+            return redirect('register');
         }
     }
 

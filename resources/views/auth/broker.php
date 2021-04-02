@@ -6,11 +6,11 @@
 
     <div class="form-floating">
       <input type="text" name="username" class="form-control" id="floatingInput" >
-      <label for="floatingInput">Username</label>
+      <label for="floatingInput"><?php __('auth.username') ?></label>
     </div>
     <div class="form-floating">
       <input type="password" name="password" class="form-control" id="floatingPassword">
-      <label for="floatingPassword">Password</label>
+      <label for="floatingPassword"><?php __('auth.password') ?></label>
     </div>
     <input type="hidden" name="host" value="<?php e($_GET['host']) ?>">
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
