@@ -58,7 +58,8 @@ require_once ABSPATH . '/config/routes.php';
 | Check if development environment
 |
 */
-if(config('app.env') === 'devlopment') {
+
+if(config('app.env') === 'development') {
     ini_set('display_errors', 'On');
     error_reporting(E_ALL ^ E_NOTICE);
 } else {

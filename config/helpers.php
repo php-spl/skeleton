@@ -26,7 +26,7 @@ function app($container = null) {
 
  function model($name = null) {
   if($name) {
-    $model = config('db.namespace') . DIRECTORY_SEPARATOR . $name;
+    $model = config('db.namespace') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name . 'Model';
     return new $model(db());
   }
   if(app()->has($name)) {

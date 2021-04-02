@@ -15,35 +15,7 @@ class UserController extends Controller
     
     public function index() 
     {
-        view('user/login');
-    }
-
-    public function login() 
-    {
-       $v = validate($_POST, [
-            'email' => [
-                'required' => true,
-                'max' => 50,
-                'email' => true
-            ],
-            'password' => [
-                'required' => true
-            ]
-        ]);
-
-        if(!$v->fails()) {
-           $auth = auth()->attempt(
-                request()->get('email'),
-                request()->get('password')
-            );
-
-            if($auth) {
-               return redirect('profile');
-            } else {
-                session()->set('errors', $v->errors()->get());
-                return redirect('login');
-            }
-        }
+        view('user/profile');
     }
 
     public function create()

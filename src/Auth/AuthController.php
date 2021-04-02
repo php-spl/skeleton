@@ -14,12 +14,52 @@ class AuthController extends Controller
     {
        VerifyCSRF::handle();
     }
+
+    public function index() 
+    {
+        view('auth/login');
+    }
     
     public function broker() 
     {
         view('auth/broker', [
             'title' => 'SSO Login'
         ]);
+    }
+
+    public function login() 
+    {
+       $v = validate($_POST, [
+            'email' => [
+                'required' => true,
+                'max' => 50,
+                'email' => true
+            ],
+            'password' => [
+                'required' => true
+            ]
+        ]);
+
+        if(!$v->fails()) {
+
+            $remember = false;
+            if(request()->get('remember')) {
+                $remember = true;
+            }
+
+           $auth = auth()->attempt(
+                request()->get('email'),
+                request()->get('password'),
+                $remember
+            );
+
+            if($auth) {
+               return redirect('profile');
+            } else {
+                session()->set('errors', $v->errors()->get());
+                return redirect('login');
+            }
+        }
     }
 
     public function idp() 
@@ -29,8 +69,6 @@ class AuthController extends Controller
             request()->get('username'),
             request()->get('password')
         );
-
-
 
        $v = validate($_POST, [
             'username' => [
@@ -63,7 +101,7 @@ class AuthController extends Controller
             }
         } else {
             session()->set('errors', $v->errors()->get());
-            return redirect('login');
+            return redirect('login.broker');
         }
     }
 

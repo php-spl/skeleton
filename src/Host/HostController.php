@@ -8,8 +8,6 @@ class HostController extends Controller
 {
     public function index() 
     {
-        view('frontend/welcome', [
-            'title' => 'Hello World!'
-        ]);
+        return 'nothing';
     }
 }

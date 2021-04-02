@@ -19,7 +19,7 @@ return [
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
-        'namespace' => 'App\Models',
+        'namespace' => 'App',
         'migrate' => env('migrate', false),
         'seeds' => env('seeds', false)
     ],
