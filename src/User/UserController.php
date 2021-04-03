@@ -84,7 +84,7 @@ class UserController extends Controller
 
     public function profile() 
     {
-        view('backend/profile');
+        view('user/profile');
     }
 
 }

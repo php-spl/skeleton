@@ -76,6 +76,10 @@ function e($string, $escape = true) {
   echo config('app.url') . $path;
  }
 
+ function current_url() {
+  echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+ }
+
  function route($name, $params = []) {
   echo app()->router->link($name, $params);
  }
@@ -100,8 +104,11 @@ function e($string, $escape = true) {
   return app()->response;
 }
 
- function request() {
-   return app()->request;
+ function request($key = false) {
+   if(!$key) {
+    return app()->request;
+   }
+   return app()->request->get($key);
  }
 
  function session() {

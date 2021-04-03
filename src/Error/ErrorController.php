@@ -8,7 +8,7 @@ class ErrorController extends Controller
 {
     public function error($code)
     {
-        view("errors/{$code}", [
+        view("error/{$code}", [
             'title' => "ERROR {$code}"
         ]);
     }

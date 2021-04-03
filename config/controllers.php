@@ -2,22 +2,18 @@
 
 use Web\App\Container;
 
-$app->set('DefaultController', function() {
-   return new App\Http\Controllers\DefaultController;
-});
-
-$app->set('HomeController', function() {
-   return new App\Http\Controllers\Frontend\HomeController;
+$app->set('PageController', function() {
+   return new App\Page\PageController;
 });
 
 $app->set('AuthController', function() {
-   return new App\Http\Controllers\Frontend\AuthController;
+   return new App\Auth\AuthController;
 });
 
 $app->set('PostController', function() {
-   return new App\Http\Controllers\Frontend\PostController;
+   return new App\Post\PostController;
 });
 
 $app->set('AdminController', function() {
-   return new App\Http\Controllers\Backend\AdminController;
+   return new App\Admin\AdminController;
 });

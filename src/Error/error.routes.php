@@ -1,5 +1,5 @@
 <?php
 
 router()->get('/error/404', function(){
-	view('errors/404');
+	return controller('Error')->error(404);
 })->name('404');

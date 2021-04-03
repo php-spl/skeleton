@@ -1,5 +1,5 @@
 <?php include layout('auth/header') ?>
-<?php include component('errors/messages') ?>
+<?php include component('error/messages') ?>
 <main class="form-signin">
   <form method="post" action="<?php route('register') ?>">
     <h1 class="h3 mb-3 fw-normal">Register</h1>

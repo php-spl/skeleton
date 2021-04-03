@@ -1,3 +1,9 @@
+<?php if(session()->has('error')): ?>
+    <div class="alert alert-danger" role="alert">
+    <?php e(session()->get('error')) ?>
+    <?php session()->delete('error') ?>
+    </div>
+<?php endif; ?>
 <?php if(session()->has('errors')): ?>
 <?php $errors = session()->get('errors') ?>
 <?php foreach($errors as $error): ?>

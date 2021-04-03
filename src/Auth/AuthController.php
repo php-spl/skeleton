@@ -17,6 +17,13 @@ class AuthController extends Controller
 
     public function index() 
     {
+        if(request()->get('auth')) {
+            if(!$this->hmacLogin()) {
+                session()->set('error', 'Error in SSO login!');
+                return redirect('login.broker');
+            }
+        }
+
         view('auth/login');
     }
     
@@ -27,8 +34,47 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login() 
+    protected function authenticate($usernameOrEmail, $password)
     {
+        $remember = false;
+        if(request()->get('remember')) {
+            $remember = true;
+        }
+
+        if(isset($usernameOrEmail) && isset($password)) {
+            return auth()->attempt($usernameOrEmail, $password, $remember);
+        }
+        return false;
+    }
+
+    public function hmacLogin()
+    {
+        if(request()->get('user_id')) {
+            $user_id = request()->get('user_id');
+            $target = $this->validateDomain(request()->get('src'));
+            $host = $this->getHost($target['host']);
+
+            // See if they have the right signature
+            $user = $user_id . request()->get('user_name') . $host->secret;
+            $check = Hash::equals($user, request()->get('sig'));
+
+            if($check) {
+                if(session()->has('user')) {
+                    session()->delete('user');
+                }
+                session()->set('user', $user_id);
+                return redirect('profile');
+            } else {
+                session()->set('error', 'Hash does not match!');
+                return redirect('login.broker');
+            }
+        }
+        return false;
+    }
+
+    public function login() 
+    {    
+
        $v = validate($_POST, [
             'email' => [
                 'required' => true,
@@ -42,33 +88,22 @@ class AuthController extends Controller
 
         if(!$v->fails()) {
 
-            $remember = false;
-            if(request()->get('remember')) {
-                $remember = true;
-            }
-
-           $auth = auth()->attempt(
-                request()->get('email'),
-                request()->get('password'),
-                $remember
-            );
+           $auth = $this->authenticate(request()->get('username'), request()->get('password'));
 
             if($auth) {
                return redirect('profile');
             } else {
-                session()->set('errors', $v->errors()->get());
+                session()->set('error', 'Wrong credentials!');
                 return redirect('login');
             }
+        } else {
+            session()->set('errors', $v->errors()->get());
+            return redirect('login');
         }
     }
 
     public function idp() 
     {
-
-        $auth = auth()->attempt(
-            request()->get('username'),
-            request()->get('password')
-        );
 
        $v = validate($_POST, [
             'username' => [
@@ -80,24 +115,21 @@ class AuthController extends Controller
         ]);
 
         if(!$v->fails()) {
-           $auth = auth()->attempt(
-                request()->get('username'),
-                request()->get('password')
-            );
 
-            $host = $this->validateHost(request()->get('host'));
+            $auth = auth()->attempt(request()->get('username'), request()->get('password'));
+            $target = $this->validateDomain(request()->get('src'));
+            $host = $this->getHost($target['host']);
 
-            if($auth && $host) {
+            if($auth && $target && $host) {
                 // Generate signature from authentication info + secret key
-                $user_id = auth()->id;
-                $user_name = auth()->username;
-                $key = config('app.key');
+                $hmac = $this->hmac(auth()->user(), $host->secret);
 
-                $sig = Hash::make($user_id . $user_name, $key);
+                $url = $target['url'] . "?auth=hmac&src={$target['url']}&user_id={$hmac['user_id']}&user_name={$hmac['user_name']}&sig={$hmac['sig']}";
 
-               return redirect($host . "?user_id={$user_id}&user_name={$user_name}&sig={$sig}");
+                return redirect($url);
             } else {
-                return redirect($host . '?error=1');
+                session()->set('error', 'Wrong credentials or user not registered!');
+                return redirect($target['url'] . '?auth_error=1');
             }
         } else {
             session()->set('errors', $v->errors()->get());
@@ -105,9 +137,37 @@ class AuthController extends Controller
         }
     }
 
-    protected function validateHost($host)
+    protected function getHost($host)
     {
-        return model('Host')->select()->where('host', $host)->count();
+        if($host) {
+            return model('Host')->select()->where('host', $host)->first();
+        }
+        return false;
+    }
+
+    protected function validateDomain($src)
+    {
+        $source = parse_url($src);
+
+        if($source) {
+            $target['url'] = $source['scheme']. '://' .$source['host'].$source['path'];
+            $target['host'] = $source['host'];
+            return $target;
+        }
+        return false;
+    }
+
+    protected function hmac($auth, $key)
+    {
+        if($auth) {
+            $hmac['user_id'] = $auth->id;
+            $hmac['user_name'] = urlencode($auth->username);
+            $hmac['key'] = $key;
+            $hmac['sig'] = Hash::make($hmac['user_id']  .  $hmac['user_name'], $hmac['key']);
+            return $hmac;
+        }
+        return false;
+
     }
 
     public function create()

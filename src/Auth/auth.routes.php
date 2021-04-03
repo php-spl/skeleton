@@ -20,5 +20,5 @@ router()->get('/login', function() {
 
 router()->get('/logout', function() {
     auth()->logout();
-    redirect('/login');
+    redirect('login');
  })->name('logout');
