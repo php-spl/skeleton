@@ -1,24 +1,14 @@
 <?php
 
-// SSO auth
-router()->get('/auth/broker', function() {
-    return controller(Auth::class)->broker();
-})->name('login.broker');
-
-router()->post('/auth/idp', function() {
-    return controller(Auth::class)->idp();
-})->name('login.idp');
+use App\Auth\AuthController;
+use App\Auth\SSO\SSOController;
 
 // User auth
-router()->get('/login', function() {
-    return controller(Auth::class)->index();
- })->name('login');
- 
- router()->post('/login', function() {
-    return controller(Auth::class)->login();
- });
+router()->get('/login', AuthController::class . '@login')->name('login');
+router()->post('/auth', AuthController::class . '@auth')->name('login.auth');
+router()->get('/logout', AuthController::class . '@logout')->name('logout');
 
-router()->get('/logout', function() {
-    auth()->logout();
-    redirect('login');
- })->name('logout');
+// SSO auth
+router()->get('/sso/login', SSOController::class . '@login')->name('sso.login');
+router()->post('/sso/auth', SSOController::class . '@auth')->name('sso.auth');
+router()->get('/sso/logout', SSOController::class . '@logout')->name('sso.logout');

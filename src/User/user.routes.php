@@ -10,4 +10,4 @@
 
  router()->get('/profile', function() {
    return controller('User')->profile();
-});
+})->name('profile');

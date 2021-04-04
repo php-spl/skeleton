@@ -1,7 +1,7 @@
 <?php include layout('auth/header') ?>
 <main class="form-signin">
 <?php component('error/messages') ?>
-  <form method="post" action="<?php route('login') ?>">
+  <form method="post" action="<?php route('login.auth') ?>">
     <h1 class="h3 mb-3 fw-normal">Login</h1>
 
     <div class="form-floating">
@@ -19,8 +19,8 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-    <a href="<?php route('register') ?>">Register</a><br>
-    <a href="<?php route('login.broker') ?>?src=<?php current_url() ?>">SSO login</a><br>
+    <a href="<?php route('register') ?>">Register</a>
+    <a href="<?php route('sso.login') ?>?src=<?php route('sso.login') ?>">SSO login</a>
     <?php if(auth()->check()): ?>
       <a href="<?php route('logout') ?>">Logout</a>
     <?php endif; ?>

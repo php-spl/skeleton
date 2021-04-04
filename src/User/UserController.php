@@ -5,6 +5,8 @@ namespace App\User;
 use Web\Http\Controller;
 use App\Middleware\VerifyCSRF;
 
+use App\User\UserModel as User;
+
 class UserController extends Controller
 {
 
@@ -39,7 +41,7 @@ class UserController extends Controller
         ]);
 
         if(!$v->fails()) {
-           $user = model('User')->insert([
+           $user = User::factory()->insert([
                 'username' => explode('@', request()->get('email'))[0],
                 'email' => request()->get('email'),
                 'password' => password(request()->get('password'))

@@ -49,8 +49,13 @@ $app->set('error', function() {
     return new Web\Error\ErrorHandler;
 });
 
-// Database
+// DB connection
 $app->set('db', Web\Database\Connection::factory($app->config->db));
+
+// Database
+$app->set('model', function(Container $c) {
+    return new Web\Database\Model($c->db);
+ });
 
 // SQL
 $app->set('sql', function() {
