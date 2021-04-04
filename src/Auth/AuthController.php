@@ -14,6 +14,7 @@ use function session;
 use function redirect;
 use function auth;
 use function validate;
+use function __;
 
 class AuthController extends Controller
 {

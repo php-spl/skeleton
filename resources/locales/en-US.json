@@ -4,5 +4,11 @@
         "login_message": "Logged in as {name} ({email})"
     }],
     "Username": "Username",
-    "Password": "Password"
+    "Password": "Password",
+    "Login": "Login",
+    "Register": "Register",
+    "Logout": "Logout",
+    "SSO Login": "SSO Login",
+    "Remember me": "Remember me",
+    "Sign in": "Sign in"
 }

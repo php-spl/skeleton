@@ -68,8 +68,11 @@ function e($string, $escape = true) {
  
  }
 
- function __($string, $params = []) {
-   echo app()->translator->get($string, $params);
+ function __($string, $replace = [], $locale = false) {
+   if($locale) {
+     app()->translator->forceLanguage($locale);
+   }
+   echo app()->translator->get($string, $replace);
  }
 
  function url($path = '') {
