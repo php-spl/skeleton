@@ -1,6 +1,6 @@
 <?php
 
 router()->get('/test', function(){
-   echo 'Hello World';
+   // test stuff
 })->name('test');
 

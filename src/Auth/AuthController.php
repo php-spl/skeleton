@@ -5,7 +5,20 @@ namespace App\Auth;
 use Web\Http\Controller;
 use Web\Security\Hash;
 
+use App\Auth\HMACService as HMAC;
+
 use App\Middleware\VerifyCSRF;
+
+use App\Host\HostModel as Host;
+use App\User\UserModel as User;
+
+use function parse_url;
+use function request;
+use function view;
+use function session;
+use function redirect;
+use function auth;
+use function validate;
 
 class AuthController extends Controller
 {
@@ -49,10 +62,12 @@ class AuthController extends Controller
 
     public function hmacLogin()
     {
+        $hmac = new HMAC;
+
         if(request()->get('user_id')) {
             $user_id = request()->get('user_id');
-            $target = $this->validateDomain(request()->get('src'));
-            $host = $this->getHost($target['host']);
+            $target = $hmac->parseUrl(request()->get('src'));
+            $host = Host::factory()->getHost($target['host']);
 
             // See if they have the right signature
             $user = $user_id . request()->get('user_name') . $host->secret;
@@ -118,11 +133,11 @@ class AuthController extends Controller
 
             $auth = auth()->attempt(request()->get('username'), request()->get('password'));
             $target = $this->validateDomain(request()->get('src'));
-            $host = $this->getHost($target['host']);
+            $host = Host::factory()->getHost($target['host']);
 
             if($auth && $target && $host) {
                 // Generate signature from authentication info + secret key
-                $hmac = $this->hmac(auth()->user(), $host->secret);
+                $hmac = HMAC::validate(auth()->user()->id, auth()->user()->username, $host->secret);
 
                 $url = $target['url'] . "?auth=hmac&src={$target['url']}&user_id={$hmac['user_id']}&user_name={$hmac['user_name']}&sig={$hmac['sig']}";
 
@@ -137,14 +152,6 @@ class AuthController extends Controller
         }
     }
 
-    protected function getHost($host)
-    {
-        if($host) {
-            return model('Host')->select()->where('host', $host)->first();
-        }
-        return false;
-    }
-
     protected function validateDomain($src)
     {
         $source = parse_url($src);
@@ -155,19 +162,6 @@ class AuthController extends Controller
             return $target;
         }
         return false;
-    }
-
-    protected function hmac($auth, $key)
-    {
-        if($auth) {
-            $hmac['user_id'] = $auth->id;
-            $hmac['user_name'] = urlencode($auth->username);
-            $hmac['key'] = $key;
-            $hmac['sig'] = Hash::make($hmac['user_id']  .  $hmac['user_name'], $hmac['key']);
-            return $hmac;
-        }
-        return false;
-
     }
 
     public function create()
@@ -192,7 +186,7 @@ class AuthController extends Controller
         ]);
 
         if(!$v->fails()) {
-           $user = model('User')->insert([
+           $user = User::factory()->insert([
                 'username' => request()->get('email'),
                 'email' => request()->get('email'),
                 'password' => password(request()->get('password'))

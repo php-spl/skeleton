@@ -50,17 +50,10 @@ $app->set('error', function() {
 });
 
 // Database
-$app->set('db', function(Container $c) {
-    return new Web\Database\Connection($c->config->db);
-});
-
-// Model
-$app->set('model', function(Container $c) {
-    return new Web\Database\Model($c->db);
-});
+$app->set('db', Web\Database\Connection::factory($app->config->db));
 
 // SQL
-$app->set('sql', function(Container $c) {
+$app->set('sql', function() {
    return new Web\Database\SQL;
 });
 

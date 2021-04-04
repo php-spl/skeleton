@@ -13,4 +13,12 @@ class HostModel extends Model
         'created',
         'last_login'
     ];
+
+    public function getHost($host)
+    {
+        if($host) {
+            return $this->select()->where('host', $host)->first();
+        }
+        return false;
+    }
 }
