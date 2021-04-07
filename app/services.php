@@ -20,7 +20,7 @@ $app->Session->start();
 
 // CSRF
 $app->set('CSRF', function(Container $c) {
-   return new Web\Security\CSRF($c->Config->get('app.key'));
+   return new Web\Security\CSRF(Config('app.key'));
 });
 
 // View
@@ -44,7 +44,7 @@ $app->set('Error', function() {
 });
 
 // DB connection
-$app->set('DB', Web\Database\Connection::factory($app->config->db));
+$app->set('DB', Web\Database\Connection::factory(Config('db')));
 
 // Database
 $app->set('Model', function(Container $c) {

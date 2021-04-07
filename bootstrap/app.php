@@ -65,8 +65,6 @@ foreach(glob(app_path('*.php')) as $service) {
     require_once $service;   
 }
 
-return dump(App()->Router);
-
 /*
 |--------------------------------------------------------------------------
 | Debug and error reporting
@@ -112,4 +110,4 @@ if(config('db.seed')) {
 |
 */
 
-//return $app;
+return $app;

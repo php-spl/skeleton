@@ -24,9 +24,7 @@ require_once ROOT_PATH . '/vendor/autoload.php';
 |
 */
 
-require_once ROOT_PATH . '/bootstrap/app.php';
-
-var_dump($app);
+$app = require_once ROOT_PATH . '/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +37,6 @@ var_dump($app);
 |
 */
 
-//$app->Router->run();
+$app->Router->run();
 
 
