@@ -37,16 +37,16 @@ $env = ROOT_PATH . '/env.ini';
 
 if(file_exists($env)) {
 
-    $_ENV['ENV'] = parse_ini_file($env, true);
+    $_ENV = parse_ini_file($env, true);
 
     foreach(glob(ROOT_PATH . '/config/*.php') as $config) {
-        $_ENV['CONFIG'][pathinfo($config, PATHINFO_FILENAME)] = array_merge($_ENV, require $config);    
+       $_ENV[pathinfo($config, PATHINFO_FILENAME)] = require $config;    
     }
     
     // Config
     $app->set('Config', function() {
         $config = new Web\App\Config;
-        $config->load($_ENV['CONFIG']);
+        $config->load($_ENV);
         return $config;
     });
 }
@@ -61,9 +61,15 @@ if(file_exists($env)) {
 |
 */
 
-foreach(glob(app_path('*.php')) as $service) {
-    require_once $service;   
+$services = require_once app_path('providers.php');
+foreach($services as $name => $service) {
+    $app->set($name, $service);
 }
+
+require_once app_path('models.php');
+require_once app_path('middlewares.php');
+require_once app_path('controllers.php');
+require_once app_path('routes.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -109,5 +115,7 @@ if(config('db.seed')) {
 | from the actual running of the application and sending responses.
 |
 */
+
+$app->Session->start();
 
 return $app;

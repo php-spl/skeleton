@@ -6,12 +6,10 @@ use Web\Http\Controller;
 
 use App\Middleware\VerifyCSRF;
 
+use App\Post\PostModel as Post;
+
 class PostController extends Controller
 {
-    public $url = [
-        'create' => '/post/create'
-    ];
-
     public function __construct()
     {
         VerifyCSRF::handle();
@@ -19,7 +17,7 @@ class PostController extends Controller
     
     public function index() 
     {
-        $posts = model('Post')->select();
+        $posts = Post::factory()->select();
 
         view('frontend/posts/index', [
             'posts' => $posts

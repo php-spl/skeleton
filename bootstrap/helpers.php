@@ -29,7 +29,7 @@ function env($key, $default = null) {
 
 function Config($path) {
   if($path) {
-    return app()->Config->get($path);
+    return App()->Config->get($path);
   }
 
 }
@@ -50,7 +50,7 @@ function src_path($path = null, $default = 'src/') {
   return root_path($default);
 }
 
-function app_path($path = null, $default = 'app/') {
+function App_path($path = null, $default = 'app/') {
   if($path) {
     return root_path($default . $path);
   }
@@ -64,6 +64,13 @@ function storage_path($path = null, $default = 'public/storage/') {
   return root_path($default);
 }
 
+function cache_path($path = null, $default = 'public/storage/cache/') {
+  if($path) {
+    return root_path($default . $path);
+  }
+  return root_path($default);
+}
+
 function upload_path($path = null, $default = 'uploads/') {
   if($path) {
     return storage_path($default . $path);
@@ -71,14 +78,12 @@ function upload_path($path = null, $default = 'uploads/') {
   return storage_path($default);
 }
 
-
 function resource_path($path, $default = 'resources/') {
   if($path) {
     return root_path($default . $path);
   }
   return root_path($default);
 }
-
 
 function database_path($path = null, $default = 'database/') {
   if($path) {
@@ -90,7 +95,7 @@ function database_path($path = null, $default = 'database/') {
 
 // Database
 function DB() {
-  return app()->DB;
+  return App()->DB;
  }
 
  function model($name = null) {
@@ -98,22 +103,22 @@ function DB() {
     $model = config('db.namespace') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name . 'Model';
     return new $model(db());
   }
-  if(app()->has($name)) {
-    return app()->{$name};
+  if(App()->has($name)) {
+    return App()->{$name};
   } else {
-    return app()->model;
+    return App()->model;
   }
   
  }
 
  function SQL() {
-  return app()->sql;
+  return App()->sql;
  }
 
 
 // Views and templates
-function View($path, $data = []) {
-  return app()->View->render($path, $data);
+function view($path, $data = []) {
+  return App()->View->render($path, $data);
 }
 
 function layout($include) {
@@ -135,9 +140,9 @@ function e($string, $escape = true) {
 
  function __($string, $replace = [], $locale = false) {
    if($locale) {
-     app()->translator->forceLanguage($locale);
+     App()->translator->forceLanguage($locale);
    }
-   echo app()->translator->get($string, $replace);
+   echo App()->translator->get($string, $replace);
  }
 
 function asset($path = '', $public = '/public/assets/') {
@@ -149,21 +154,21 @@ function URL($path = '') {
  }
 
  function csrf() {
-  if(app()->has('csrf')) {
-    app()->CSRF->setToken();
-    echo app()->CSRF->input();
+  if(App()->has('csrf')) {
+    App()->CSRF->setToken();
+    echo App()->CSRF->input();
   }
 
 }
 
 // HTTP
 function Router() {
-  return app()->Router;
+  return App()->Router;
  }
 
- function controller($name) {
+ function Controller($name) {
   if($name) {
-    $controller = config('http.namespaces.controllers') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name .  'Controller';
+    $controller = Config('http.namespaces.controllers') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name .  'Controller';
     return new $controller;
   }
  }
@@ -173,36 +178,36 @@ function current_url() {
  }
 
 function route($name, $params = []) {
-  echo app()->Router->link($name, $params);
+  echo App()->Router->link($name, $params);
  }
 
  function Session() {
-  return app()->Session;
+  return App()->Session;
 }
 
 function Request($key = false) {
   if(!$key) {
-   return app()->Request;
+   return App()->Request;
   }
-  return app()->Request->get($key);
+  return App()->Request->get($key);
 }
 
 function Response() {
-  return app()->Response;
+  return App()->Response;
 }
 
 function redirect($url) {
-  return app()->Router->redirect($url);
+  return App()->Router->redirect($url);
  }
 
 
 // Authentication and validation
 function Auth() {
-  return app()->Auth;
+  return App()->Auth;
 }
 
 function Validate($src, $rules) {
-  return app()->Validator->validate($src, $rules);
+  return App()->Validator->validate($src, $rules);
 }
 
 function password($password) {

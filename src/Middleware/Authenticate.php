@@ -14,11 +14,11 @@ class Authenticate extends Middleware
 
   public static function handle()
   {
-    if(!app()->has('auth')) {
+    if(!App()->has('Auth')) {
       return true;
     }
 
-    if(!session()->has('user')) {
+    if(!Session()->has('user')) {
       return redirect(self::$url['login']);
     } else {
       return true;

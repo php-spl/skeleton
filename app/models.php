@@ -3,6 +3,6 @@
 use Web\App\Container;
 
 $app->set('User', function(Container $c) {
-   return new App\User\UserModel($c->db);
+   return App\User\UserModel::factory();
 });
 

@@ -8,8 +8,8 @@ class VerifyCSRF extends Middleware
 {
   public static function handle()
   {
-    if(app()->has('csrf')) {
-      app()->csrf->check();
+    if(App()->has('CSRF')) {
+      App()->CSRF->check();
     }
     return true;
   }
