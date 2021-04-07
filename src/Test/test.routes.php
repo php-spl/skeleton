@@ -1,6 +1,6 @@
 <?php
 
-router()->get('/test', function(){
+Router()->get('/test', function(){
    // test stuff
 })->name('test');
 

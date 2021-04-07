@@ -15,6 +15,17 @@ $app = new Web\App\Container;
 
 /*
 |--------------------------------------------------------------------------
+| Setup Helper Functions
+|--------------------------------------------------------------------------
+|
+| Next, we need to setup helper functions for easier development.
+|
+*/
+
+require_once ROOT_PATH . '/bootstrap/helpers.php';
+
+/*
+|--------------------------------------------------------------------------
 | Setup environment
 |--------------------------------------------------------------------------
 |
@@ -22,10 +33,22 @@ $app = new Web\App\Container;
 |
 */
 
-$env = ABSPATH . '/env.ini';
+$env = ROOT_PATH . '/env.ini';
 
 if(file_exists($env)) {
-    $_ENV = parse_ini_file($env, true);
+
+    $_ENV['ENV'] = parse_ini_file($env, true);
+
+    foreach(glob(ROOT_PATH . '/config/*.php') as $config) {
+        $_ENV['CONFIG'][pathinfo($config, PATHINFO_FILENAME)] = array_merge($_ENV, require $config);    
+    }
+    
+    // Config
+    $app->set('Config', function() {
+        $config = new Web\App\Config;
+        $config->load($_ENV['CONFIG']);
+        return $config;
+    });
 }
 
 /*
@@ -38,17 +61,11 @@ if(file_exists($env)) {
 |
 */
 
-require_once ABSPATH . '/config/helpers.php';
+foreach(glob(app_path('*.php')) as $service) {
+    require_once $service;   
+}
 
-require_once ABSPATH . '/config/services.php';
-
-require_once ABSPATH . '/config/models.php';
-
-require_once ABSPATH . '/config/controllers.php';
-
-require_once ABSPATH . '/config/middlewares.php';
-
-require_once ABSPATH . '/config/routes.php';
+return dump(App()->Router);
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +76,7 @@ require_once ABSPATH . '/config/routes.php';
 |
 */
 
-if(config('app.env') === 'development') {
+if(config('app.debug')) {
     ini_set('display_errors', 'On');
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
@@ -76,10 +93,23 @@ if(config('app.env') === 'development') {
 |
 */
 
-if(config('db.migrate')) {
-    sql()->import(ABSPATH . '/resources/database/migrates/' . config('db.migrate'), db()->pdo);
+if(Config('db.migrate')) {
+    SQL()->import(database_path('migrates/') . Config('db.migrate'), DB()->pdo);
 }
 
 if(config('db.seed')) {
-    sql()->import(ABSPATH . '/resources/database/seeds/' . config('db.seed'), db()->pdo);
+    SQL()->import(database_path('seeds/') . Config('db.seed'), DB()->pdo);
 }
+
+/*
+|--------------------------------------------------------------------------
+| Return The Application
+|--------------------------------------------------------------------------
+|
+| This script returns the application instance. The instance is given to
+| the calling script so we can separate the building of the instances
+| from the actual running of the application and sending responses.
+|
+*/
+
+//return $app;

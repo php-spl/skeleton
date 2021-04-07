@@ -1,6 +1,6 @@
 <?php
 
-define('ABSPATH', dirname(__DIR__));
+define('ROOT_PATH', dirname(__DIR__));
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +13,20 @@ define('ABSPATH', dirname(__DIR__));
 |
 */
 
-require_once ABSPATH . '/vendor/autoload.php';
+require_once ROOT_PATH . '/vendor/autoload.php';
 
-require_once ABSPATH . '/config/bootstrap.php';
+/*
+|--------------------------------------------------------------------------
+| Bootstrap The Application
+|--------------------------------------------------------------------------
+|
+| Next, we need to bootstrap the application.
+|
+*/
+
+require_once ROOT_PATH . '/bootstrap/app.php';
+
+var_dump($app);
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +39,6 @@ require_once ABSPATH . '/config/bootstrap.php';
 |
 */
 
-app('router')->run();
+//$app->Router->run();
 
 
