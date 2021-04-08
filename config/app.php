@@ -105,6 +105,5 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', base64_encode(uniqid())),
-
+    'key' => base64_encode(env('APP_KEY', ''))
 ];

@@ -1,3 +1,5 @@
-<h2>Error 404</h2>
+<?php include layout('frontend/app/header') ?>
+<h1>Error 404</h1>
 
-<p>Page not found!</p>
+<h2>Page not found!</h2>
+<?php include layout('frontend/app/footer') ?>

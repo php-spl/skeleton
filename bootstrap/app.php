@@ -88,6 +88,10 @@ if(config('app.debug')) {
     error_reporting(0);
 }
 
+if(config('app.env') === 'maint') {
+   // return redirect('error', ['code' => 503]);
+}
+
 /*
 |--------------------------------------------------------------------------
 | Migrate database and seeds

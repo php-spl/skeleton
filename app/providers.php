@@ -94,15 +94,17 @@ return [
         return new Web\Http\Request;
     },
 
+    // Response
     'Response' => function() {
         $response = new Web\Http\Response;
-        $response->baseUrl = Config('app.url');
+        $response->baseUrl = config('app.url');
         return $response;
     },
 
+    // Router
     'Router' => function() {
         $router = new Web\Http\Router;
-        $router->setup(Config('app.url'));
+        $router->setup(config('app.url'));
         return $router;
     }
 

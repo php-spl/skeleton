@@ -2,6 +2,6 @@
 
 Router()->get('/test', function(){
    // test stuff
-   echo 'Hello World!';
+   var_dump(config('app.key'));
 })->name('test');
 

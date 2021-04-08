@@ -19,14 +19,14 @@ class PostController extends Controller
     {
         $posts = Post::factory()->select();
 
-        view('frontend/posts/index', [
+        view('posts/index', [
             'posts' => $posts
         ]);
     }
 
     public function create()
     {
-        view('frontend/posts/create');
+        view('posts/create');
     }
 
     public function store()

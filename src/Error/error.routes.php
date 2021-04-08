@@ -1,5 +1,9 @@
 <?php
 
-Router()->get('/error/404', function(){
-	return controller('Error')->error(404);
-})->name('404');
+router()->get('/error/{code}?', function($code){
+	if(is_numeric($code)) {
+		return controller(Error::class)->error($code);
+	} else {
+		return redirect('error', ['code' => 404]);
+	}
+})->name('error');

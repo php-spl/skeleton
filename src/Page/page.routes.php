@@ -1,5 +1,5 @@
 <?php
 
-Router()->get('/', function() {
+router()->get('/', function() {
     controller(Page::class)->index();
  })->name('home');

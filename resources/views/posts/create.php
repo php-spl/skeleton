@@ -1,5 +1,6 @@
 <?php include layout('frontend/blog/header') ?>
-<?php include component('errors/messages') ?>
+<?php include component('error/messages') ?>
+<div class="container">
     <form action="<?php route('post.store') ?>" method="post">
     <label for="title">Title</label><br>
     <input type="text" name="title" id="title">
@@ -9,4 +10,5 @@
     <?php csrf(); ?>
     <input type="submit" value="Save">
     </form>
+<div>
 <?php include layout('frontend/blog/footer') ?>

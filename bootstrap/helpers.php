@@ -1,13 +1,16 @@
 <?php
 
 // App
-function App($container = null) {
+function app($service = null) {
   global $app;
-  if($container) {
-    return $app->{$container};
-  } else {
-    return $app;
+  if($service) {
+    if($app->has($service)) {
+      return $app->{$service};
+    } else {
+      return false;
+    }
   }
+  return $app;
  }
 
 function env($key, $default = null) {
@@ -27,9 +30,9 @@ function env($key, $default = null) {
   return $data;
 }
 
-function Config($path) {
+function config($path) {
   if($path) {
-    return App()->Config->get($path);
+    return app('Config')->get($path);
   }
 
 }
@@ -50,32 +53,39 @@ function src_path($path = null, $default = 'src/') {
   return root_path($default);
 }
 
-function App_path($path = null, $default = 'app/') {
+function app_path($path = null, $default = 'app/') {
   if($path) {
     return root_path($default . $path);
   }
   return root_path($default);
 }
 
-function storage_path($path = null, $default = 'public/storage/') {
+function public_path($path = null, $default = 'public/') {
   if($path) {
     return root_path($default . $path);
   }
   return root_path($default);
 }
 
-function cache_path($path = null, $default = 'public/storage/cache/') {
+function storage_path($path = null, $default = 'storage/') {
   if($path) {
-    return root_path($default . $path);
+    return resource_path($default . $path);
   }
-  return root_path($default);
+  return resource_path($default);
 }
 
-function upload_path($path = null, $default = 'uploads/') {
+function cache_path($path = null, $default = 'cache/') {
   if($path) {
     return storage_path($default . $path);
   }
   return storage_path($default);
+}
+
+function upload_path($path = null, $default = 'uploads/') {
+  if($path) {
+    return public_path($default . $path);
+  }
+  return public_path($default);
 }
 
 function resource_path($path, $default = 'resources/') {
@@ -94,8 +104,8 @@ function database_path($path = null, $default = 'database/') {
 
 
 // Database
-function DB() {
-  return App()->DB;
+function db() {
+  return app('DB');
  }
 
  function model($name = null) {
@@ -103,30 +113,30 @@ function DB() {
     $model = config('db.namespace') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name . 'Model';
     return new $model(db());
   }
-  if(App()->has($name)) {
-    return App()->{$name};
+  if(app($name)) {
+    return app($name);
   } else {
-    return App()->model;
+    return app('Model');
   }
   
  }
 
- function SQL() {
-  return App()->sql;
+ function sql() {
+  return app('SQL');
  }
 
 
 // Views and templates
 function view($path, $data = []) {
-  return App()->View->render($path, $data);
+  return app('View')->render($path, $data);
 }
 
-function layout($include) {
-  return config('view.layouts') . DIRECTORY_SEPARATOR . $include . '.php';
+function layout($include, $default = 'view.layouts') {
+  return config($default) . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
- function component($include) {
- return config('view.path') . DIRECTORY_SEPARATOR . $include . '.php';
+ function component($include, $default = 'view.path') {
+ return config($default) . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
 function e($string, $escape = true) {
@@ -140,35 +150,35 @@ function e($string, $escape = true) {
 
  function __($string, $replace = [], $locale = false) {
    if($locale) {
-     App()->translator->forceLanguage($locale);
+     app('Translator')->forceLanguage($locale);
    }
-   echo App()->translator->get($string, $replace);
+   echo app('Translator')->get($string, $replace);
  }
 
 function asset($path = '', $public = '/public/assets/') {
   echo config('app.url') . $public . $path;
 }
 
-function URL($path = '') {
+function url($path = '') {
   echo config('app.url') . $path;
  }
 
  function csrf() {
-  if(App()->has('csrf')) {
-    App()->CSRF->setToken();
-    echo App()->CSRF->input();
+  if(app('CSRF')) {
+    app('CSRF')->setToken();
+    echo app('CSRF')->input();
   }
 
 }
 
 // HTTP
-function Router() {
-  return App()->Router;
+function router() {
+  return app('Router');
  }
 
- function Controller($name) {
+ function controller($name) {
   if($name) {
-    $controller = Config('http.namespaces.controllers') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name .  'Controller';
+    $controller = config('http.namespaces.controllers') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name .  'Controller';
     return new $controller;
   }
  }
@@ -178,36 +188,43 @@ function current_url() {
  }
 
 function route($name, $params = []) {
-  echo App()->Router->link($name, $params);
+  echo app('Router')->link($name, $params);
  }
 
- function Session() {
-  return App()->Session;
+ function session($name = null) {
+   if($name) {
+     if(app('Session')->has($name)) {
+      return app('Session')->get($name);
+     } else {
+       return false;
+     }
+   }
+  return app('Session');
 }
 
-function Request($key = false) {
+function request($key = false) {
   if(!$key) {
-   return App()->Request;
+   return app('Request');
   }
-  return App()->Request->get($key);
+  return app('Request')->get($key);
 }
 
-function Response() {
-  return App()->Response;
+function response() {
+  return app('Response');
 }
 
-function redirect($url) {
-  return App()->Router->redirect($url);
+function redirect($url, $params = []) {
+  return app('Router')->redirect($url, $params);
  }
 
 
 // Authentication and validation
-function Auth() {
-  return App()->Auth;
+function auth() {
+  return app('Auth');
 }
 
-function Validate($src, $rules) {
-  return App()->Validator->validate($src, $rules);
+function validate($src, $rules) {
+  return app('Validator')->validate($src, $rules);
 }
 
 function password($password) {
