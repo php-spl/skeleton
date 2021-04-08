@@ -3,7 +3,8 @@
 namespace App\User;
 
 use Web\Http\Controller;
-use App\Middleware\VerifyCSRF;
+
+use App\Service\Middleware\VerifyCSRF;
 
 use App\User\UserModel as User;
 

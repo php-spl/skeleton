@@ -4,9 +4,7 @@ namespace App\Auth;
 
 use Web\Http\Controller;
 
-use App\Middleware\VerifyCSRF;
-
-
+use App\Service\Middleware\VerifyCSRF;
 
 use function request;
 use function view;
@@ -14,7 +12,6 @@ use function session;
 use function redirect;
 use function auth;
 use function validate;
-use function __;
 
 class AuthController extends Controller
 {

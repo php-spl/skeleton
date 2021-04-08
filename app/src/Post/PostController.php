@@ -4,7 +4,7 @@ namespace App\Post;
 
 use Web\Http\Controller;
 
-use App\Middleware\VerifyCSRF;
+use App\Service\Middleware\VerifyCSRF;
 
 use App\Post\PostModel as Post;
 

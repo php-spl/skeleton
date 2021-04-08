@@ -22,7 +22,7 @@ $app = new Web\App\Container;
 |
 */
 
-require_once ROOT_PATH . '/bootstrap/helpers.php';
+require_once ROOT_PATH . '/app/src/helpers.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,13 +33,13 @@ require_once ROOT_PATH . '/bootstrap/helpers.php';
 |
 */
 
-$env = ROOT_PATH . '/env.ini';
+$env = ROOT_PATH . '/app/env.ini';
 
 if(file_exists($env)) {
 
     $_ENV = parse_ini_file($env, true);
 
-    foreach(glob(ROOT_PATH . '/config/*.php') as $config) {
+    foreach(glob(ROOT_PATH . '/app/config/*.php') as $config) {
        $_ENV[pathinfo($config, PATHINFO_FILENAME)] = require $config;    
     }
     
@@ -61,15 +61,15 @@ if(file_exists($env)) {
 |
 */
 
-$services = require_once app_path('providers.php');
+$services = require_once src_path('providers.php');
 foreach($services as $name => $service) {
     $app->set($name, $service);
 }
 
-require_once app_path('models.php');
-require_once app_path('middlewares.php');
-require_once app_path('controllers.php');
-require_once app_path('routes.php');
+require_once src_path('models.php');
+require_once src_path('middlewares.php');
+require_once src_path('controllers.php');
+require_once src_path('routes.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -119,7 +119,5 @@ if(config('db.seed')) {
 | from the actual running of the application and sending responses.
 |
 */
-
-$app->Session->start();
 
 return $app;

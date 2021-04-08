@@ -24,7 +24,7 @@ require_once ROOT_PATH . '/vendor/autoload.php';
 |
 */
 
-$app = require_once ROOT_PATH . '/bootstrap/app.php';
+$app = require_once ROOT_PATH . '/app/src/bootstrap.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +36,8 @@ $app = require_once ROOT_PATH . '/bootstrap/app.php';
 | to this client's browser, allowing them to enjoy our application.
 |
 */
+
+$app->Session->start();
 
 $app->Router->run();
 

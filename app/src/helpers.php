@@ -46,18 +46,18 @@ function root_path($path = null, $default = '/') {
   return ROOT_PATH . $default;
 }
 
-function src_path($path = null, $default = 'src/') {
+function app_path($path = null, $default = 'app/') {
   if($path) {
     return root_path($default . $path);
   }
   return root_path($default);
 }
 
-function app_path($path = null, $default = 'app/') {
+function src_path($path = null, $default = 'src/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 function public_path($path = null, $default = 'public/') {
@@ -69,9 +69,9 @@ function public_path($path = null, $default = 'public/') {
 
 function storage_path($path = null, $default = 'storage/') {
   if($path) {
-    return resource_path($default . $path);
+    return app_path($default . $path);
   }
-  return resource_path($default);
+  return app_path($default);
 }
 
 function cache_path($path = null, $default = 'cache/') {
@@ -90,16 +90,16 @@ function upload_path($path = null, $default = 'uploads/') {
 
 function resource_path($path, $default = 'resources/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 function database_path($path = null, $default = 'database/') {
   if($path) {
-    return resource_path($default . $path);
+    return app_path($default . $path);
   }
-  return resource_path($default);
+  return app_path($default);
 }
 
 
@@ -128,6 +128,16 @@ function db() {
 
 // Views and templates
 function view($path, $data = []) {
+  return app('View')->render($path, $data);
+}
+
+function domain_view($path, $data = []) {
+  $path = explode('/', $path);
+  $domain = ucfirst($path[0]);
+  unset($path[0]);
+  $path = implode('/', $path);
+
+  app('View')->path = src_path($domain . '/views');
   return app('View')->render($path, $data);
 }
 

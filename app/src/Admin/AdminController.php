@@ -4,7 +4,7 @@ namespace App\Admin;
 
 use Web\Http\Controller;
 
-use App\Middleware\VerifyCSRF;
+use App\Service\Middleware\VerifyCSRF;
 
 class AdminController extends Controller
 {

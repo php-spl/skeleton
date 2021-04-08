@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Service\Middleware;
 
 use Web\Http\Middleware;
 
