@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/datalaere/php-web-framework.git",
-                "reference": "8c84f54465649ae2e6e3329e394ff19aedcdd8f1"
+                "reference": "99d8f60cb338fc486a4832a459f7a236b3aadec2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datalaere/php-web-framework/zipball/8c84f54465649ae2e6e3329e394ff19aedcdd8f1",
-                "reference": "8c84f54465649ae2e6e3329e394ff19aedcdd8f1",
+                "url": "https://api.github.com/repos/datalaere/php-web-framework/zipball/99d8f60cb338fc486a4832a459f7a236b3aadec2",
+                "reference": "99d8f60cb338fc486a4832a459f7a236b3aadec2",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "source": "https://github.com/datalaere/php-web-framework/tree/main",
                 "issues": "https://github.com/datalaere/php-web-framework/issues"
             },
-            "time": "2021-04-04T20:11:09+00:00"
+            "time": "2021-04-08T12:14:17+00:00"
         },
         {
             "name": "psr/cache",
