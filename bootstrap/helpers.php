@@ -69,9 +69,9 @@ function public_path($path = null, $default = 'public/') {
 
 function storage_path($path = null, $default = 'storage/') {
   if($path) {
-    return app_path($default . $path);
+    return root_path($default . $path);
   }
-  return app_path($default);
+  return root_path($default);
 }
 
 function cache_path($path = null, $default = 'cache/') {
@@ -90,16 +90,16 @@ function upload_path($path = null, $default = 'uploads/') {
 
 function resource_path($path, $default = 'resources/') {
   if($path) {
-    return app_path($default . $path);
+    return root_path($default . $path);
   }
-  return app_path($default);
+  return root_path($default);
 }
 
 function database_path($path = null, $default = 'database/') {
   if($path) {
-    return app_path($default . $path);
+    return root_path($default . $path);
   }
-  return app_path($default);
+  return root_path($default);
 }
 
 
@@ -250,4 +250,12 @@ function password($password) {
  function halt() {
   return var_dump(func_get_args());
   exit();
+}
+
+
+// MISC
+function is_assoc_array(array $arr)
+{
+    if (array() === $arr) return false;
+    return array_keys($arr) !== range(0, count($arr) - 1);
 }

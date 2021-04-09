@@ -1,6 +1,6 @@
 <?php
 
-use App\Middleware\{Authenticate};
+use App\Auth\Http\Middleware\{Authenticate};
 
 router()->get('/admin', function() {
   Authenticate::handle();

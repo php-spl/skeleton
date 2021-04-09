@@ -22,7 +22,7 @@ $app = new Web\App\Container;
 |
 */
 
-require_once ROOT_PATH . '/app/helpers.php';
+require_once ROOT_PATH . '/bootstrap/helpers.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ if(file_exists($env)) {
 
     $_ENV = parse_ini_file($env, true);
 
-    foreach(glob(ROOT_PATH . '/app/config/*.php') as $config) {
+    foreach(glob(ROOT_PATH . '/config/*.php') as $config) {
        $_ENV[pathinfo($config, PATHINFO_FILENAME)] = require $config;    
     }
     
@@ -53,20 +53,47 @@ if(file_exists($env)) {
 
 /*
 |--------------------------------------------------------------------------
-| Bind Important Services
+| Autoload Service Providers
 |--------------------------------------------------------------------------
 |
-| Next, we need to bind some important services into the container so
+| The service providers listed in "app" will automatically be loaded on the
+| request to your application. Feel free to add your own services to
+| the "app" folders as arrays to grant expanded functionality to your applications.
+|
+*/
+
+foreach(glob(ROOT_PATH . '/app/*.php') as $service_provider) {
+    $services[ucfirst(pathinfo($service_provider, PATHINFO_FILENAME))] = require $service_provider;     
+}
+
+foreach($services as $name => $service) {
+    if(is_array($service)) {
+        foreach($service as $alias => $subservice) {
+            if($name === $alias) {
+                $app->set($alias, $subservice);
+            } else {
+                $app->set($name.$alias, $subservice);
+            }
+        }
+    } else {
+        $app->set($name, $service);
+    }
+}
+
+return var_dump($app);
+/*
+|--------------------------------------------------------------------------
+| Bind Routes
+|--------------------------------------------------------------------------
+|
+| Next, we need to bind routes to the router so
 | we will be able to resolve them when needed. 
 |
 */
 
-$services = require_once app_path('providers.php');
-foreach($services as $name => $service) {
-    $app->set($name, $service);
+foreach(glob(ROOT_PATH . '/routes/*.php') as $route) {
+    require_once $route; 
 }
-
-require_once app_path('routes.php');
 
 /*
 |--------------------------------------------------------------------------
