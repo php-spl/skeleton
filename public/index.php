@@ -24,7 +24,7 @@ require_once ROOT_PATH . '/vendor/autoload.php';
 |
 */
 
-$app = require_once ROOT_PATH . '/app/src/bootstrap.php';
+$app = require_once ROOT_PATH . '/app/bootstrap.php';
 
 /*
 |--------------------------------------------------------------------------

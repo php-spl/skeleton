@@ -22,7 +22,7 @@ $app = new Web\App\Container;
 |
 */
 
-require_once ROOT_PATH . '/app/src/helpers.php';
+require_once ROOT_PATH . '/app/helpers.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ require_once ROOT_PATH . '/app/src/helpers.php';
 |
 */
 
-$env = ROOT_PATH . '/app/env.ini';
+$env = ROOT_PATH . '/env.ini';
 
 if(file_exists($env)) {
 
@@ -61,15 +61,12 @@ if(file_exists($env)) {
 |
 */
 
-$services = require_once src_path('providers.php');
+$services = require_once app_path('providers.php');
 foreach($services as $name => $service) {
     $app->set($name, $service);
 }
 
-require_once src_path('models.php');
-require_once src_path('middlewares.php');
-require_once src_path('controllers.php');
-require_once src_path('routes.php');
+require_once app_path('routes.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -101,12 +98,12 @@ if(config('app.env') === 'maint') {
 |
 */
 
-if(Config('db.migrate')) {
-    SQL()->import(database_path('migrates/') . Config('db.migrate'), DB()->pdo);
+if(config('db.migrate')) {
+    sql()->import(database_path('migrates/') . config('db.migrate'), db()->pdo);
 }
 
 if(config('db.seed')) {
-    SQL()->import(database_path('seeds/') . Config('db.seed'), DB()->pdo);
+    sql()->import(database_path('seeds/') . config('db.seed'), db()->pdo);
 }
 
 /*
