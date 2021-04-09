@@ -1,0 +1,14 @@
+{
+    "presentation": "Nu bliver disse beskeder på dansk.",
+    "user" : [{
+        "login_message": "Logget ind som {name} ({email})"
+    }],
+    "Username": "Brugernavn",
+    "Password": "Adgangskode",
+    "Login": "Log på",
+    "Register": "Opret",
+    "Logout": "Log ud",
+    "SSO Login": "SSO Login",
+    "Remember me": "Husk mig",
+    "Sign in": "Log ind"
+}

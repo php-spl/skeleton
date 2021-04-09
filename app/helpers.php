@@ -55,9 +55,9 @@ function app_path($path = null, $default = 'app/') {
 
 function src_path($path = null, $default = 'src/') {
   if($path) {
-    return app_path($default . $path);
+    return root_path($default . $path);
   }
-  return app_path($default);
+  return root_path($default);
 }
 
 function public_path($path = null, $default = 'public/') {
