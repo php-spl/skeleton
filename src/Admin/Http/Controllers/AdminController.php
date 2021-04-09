@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Admin;
+namespace App\Admin\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Service\Middleware\VerifyCSRF;
+use App\Provider\Http\Middleware\VerifyCSRF;
 
 class AdminController extends Controller
 {
@@ -20,8 +20,8 @@ class AdminController extends Controller
         view('backend/admin/dashboard');
     }
 
-    public function create($type)
+    public function create()
     {
-        echo $type;
+        
     }
 }

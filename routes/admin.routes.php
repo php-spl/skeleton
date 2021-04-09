@@ -1,20 +1,15 @@
 <?php
 
-use App\Auth\Http\Middleware\{Authenticate};
+use App\Auth\Http\Middleware\Authenticate;
+use App\Admin\Http\Controllers\AdminController;
+use App\Post\Http\Controllers\PostController;
 
-router()->get('/admin', function() {
-  Authenticate::handle();
-   return controller(Backend\Admin::class)->index();
- })->name('admin');
+router()->get('/admin', AdminController::class . '@index')->name('admin');
 
 // Posts
-router()->get('/admin/posts', function() {
-   return controller(Post::class)->index();
- })->name('admin.posts');
+router()->get('/admin/posts', PostController::class . '@index')->name('admin.posts');
 
- router()->get('/admin/post/create', function() {
-   return controller(Post::class)->create();
- })->name('admin.posts.create');
+ router()->get('/admin/post/create', PostController::class . '@create')->name('admin.post.create');
 
  router()->post('/admin/post', function() {
    return controller(Post::class)->store();

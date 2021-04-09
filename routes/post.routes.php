@@ -1,6 +1,7 @@
 <?php
-use App\Middleware\{VerifyCSRF, Authenticate};
-use App\Post\PostController;
+
+use App\Auth\Http\Middleware\Authenticate;
+use App\Post\Http\Controllers\PostController;
 
 // Posts
 router()->get('/posts', PostController::class . '@index')->name('posts');

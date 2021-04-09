@@ -11,7 +11,9 @@ return [
     | the usual view path has already been registered for you.
     |
     */
-
-    'path' => resource_path('views'),
-    'layouts' => resource_path('views/layouts'),
+    'view' => [
+        'path' => resource_path('views'),
+        'layouts' => resource_path('views/layouts')
+    ]
+    
 ];

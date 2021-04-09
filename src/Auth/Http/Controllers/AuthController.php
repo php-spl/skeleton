@@ -4,7 +4,7 @@ namespace App\Auth\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Service\Middleware\VerifyCSRF;
+use App\Provider\Http\Middleware\VerifyCSRF;
 
 use function request;
 use function view;

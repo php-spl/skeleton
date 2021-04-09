@@ -4,7 +4,7 @@
 
 return [
 
-    function() {
+    'Error' => function() {
         return new Web\Error\ErrorHandler;
     }
     

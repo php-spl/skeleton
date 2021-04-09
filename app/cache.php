@@ -4,16 +4,16 @@ use Web\App\Container;
 
 return [
 
-    'File' => function(Container $c) {
+    'FileCache' => function() {
         $cache = new Web\Cache\FileCache(storage_path('cache/')); 
         return $cache;
     },
 
-    'PDO' => function() {
+    'PDOCache' => function(Container $c) {
         $cache = new Web\Cache\PDOCache($c->DB->pdo, config('cache.table'));
         return $cache;
     },
 
-    'Array' => Web\Cache\ArrayCache::class
+    'ArrayCache' => Web\Cache\ArrayCache::class
 
 ];

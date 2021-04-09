@@ -141,11 +141,11 @@ function domain_view($path, $data = []) {
   return app('View')->render($path, $data);
 }
 
-function layout($include, $default = 'view.layouts') {
+function layout($include, $default = 'filesystem.view.layouts') {
   return config($default) . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
- function component($include, $default = 'view.path') {
+ function component($include, $default = 'filesystem.view.path') {
  return config($default) . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
@@ -184,13 +184,6 @@ function url($path = '') {
 // HTTP
 function router() {
   return app('Router');
- }
-
- function controller($name) {
-  if($name) {
-    $controller = config('http.namespaces.controllers') . DIRECTORY_SEPARATOR . ucwords($name) . DIRECTORY_SEPARATOR .  $name .  'Controller';
-    return new $controller;
-  }
  }
 
 function current_url() {

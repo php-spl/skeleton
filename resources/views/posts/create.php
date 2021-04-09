@@ -1,4 +1,4 @@
-<?php include layout('frontend/blog/header') ?>
+<?php include layout('frontend/post/header') ?>
 <?php include component('error/messages') ?>
 <div class="container">
     <form action="<?php route('post.store') ?>" method="post">
@@ -11,4 +11,4 @@
     <input type="submit" value="Save">
     </form>
 <div>
-<?php include layout('frontend/blog/footer') ?>
+<?php include layout('frontend/post/footer') ?>

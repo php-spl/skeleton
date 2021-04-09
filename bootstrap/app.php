@@ -56,31 +56,24 @@ if(file_exists($env)) {
 | Autoload Service Providers
 |--------------------------------------------------------------------------
 |
-| The service providers listed in "app" will automatically be loaded on the
+| The service providers listed in the "app" folder will automatically be loaded on the
 | request to your application. Feel free to add your own services to
 | the "app" folders as arrays to grant expanded functionality to your applications.
 |
 */
 
 foreach(glob(ROOT_PATH . '/app/*.php') as $service_provider) {
-    $services[ucfirst(pathinfo($service_provider, PATHINFO_FILENAME))] = require $service_provider;     
+    $services[] = require $service_provider;     
 }
 
-foreach($services as $name => $service) {
-    if(is_array($service)) {
-        foreach($service as $alias => $subservice) {
-            if($name === $alias) {
-                $app->set($alias, $subservice);
-            } else {
-                $app->set($name.$alias, $subservice);
-            }
+foreach($services as $name => $provider) {
+    if(is_array($provider)) {
+        foreach($provider as $alias => $service) {
+            $app->set($alias, $service);
         }
-    } else {
-        $app->set($name, $service);
     }
 }
 
-return var_dump($app);
 /*
 |--------------------------------------------------------------------------
 | Bind Routes

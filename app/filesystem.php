@@ -2,9 +2,9 @@
 
 return [
 
-    function() {
+   'View' => function() {
         $view = new Web\Filesystem\View;
-        $view->path = config('view.path');
+        $view->path = config('filesystem.view.path');
         return $view;
     }
 

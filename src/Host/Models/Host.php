@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Host;
+namespace App\Host\Models;
 
 use Web\Database\Model;
 
-class HostModel extends Model
+class Host extends Model
 {
     protected $fillable = [
         'id',

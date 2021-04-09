@@ -1,13 +1,9 @@
 <?php
- 
- router()->get('/register', function() {
-    return controller('User')->create();
- })->name('register');
- 
- router()->post('/register', function() {
-    return controller('User')->store();
- });
 
- router()->get('/profile', function() {
-   return controller('User')->profile();
-})->name('profile');
+use App\User\Http\Controllers\UserController;
+ 
+ router()->get('/register', UserController::class . '@index')->name('register');
+ 
+ router()->post('/register', UserController::class . '@store');
+
+ router()->get('/profile', UserController::class . 'profile')->name('profile');

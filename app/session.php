@@ -1,8 +1,18 @@
 <?php
 
-// Session handler singleton
+use Web\App\Container;
 
 return [
-   'Native' => Web\Session\NativeSession::class,
-   'PDO' => Web\Session\PDOSession::class
+
+   'Session' => Web\Session\NativeSession::class,
+
+   'Sessions' => function(Container $c) {
+      $session = new Web\Session\PDOSession($c->DB->pdo, [
+         'table_name' => 'sessions'
+      ]);
+      return $session;
+   },
+
+   'Cookie' => Web\Session\Cookie::class
+   
 ];
