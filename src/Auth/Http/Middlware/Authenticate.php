@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Auth;
+namespace App\Auth\Http\Middleware;
 
 use Web\Http\Middleware;
 
-class AuthMiddleware extends Middleware
+class Authenticate extends Middleware
 {
 
   public static function handle()

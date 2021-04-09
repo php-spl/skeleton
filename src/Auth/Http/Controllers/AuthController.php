@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Auth\SSO;
+namespace App\Auth\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Auth\SSO\HMACService as HMAC;
-
-use App\Middleware\VerifyCSRF;
+use App\Service\Middleware\VerifyCSRF;
 
 use function request;
 use function view;
@@ -15,7 +13,7 @@ use function redirect;
 use function auth;
 use function validate;
 
-class SSOController extends Controller
+class AuthController extends Controller
 {
 
     public function __construct()
@@ -25,16 +23,11 @@ class SSOController extends Controller
 
     public function login() 
     {
-        if(request('auth')) {
-            if(HMAC::login(request('src'), request('user_id'), request('user_name'), request('sig'))) {
-                return redirect('profile');
-            }
-        }
-
-        return view('auth/sso', [
-            'title' => 'SSO Login'
+        return view('auth/login', [
+            'title' => 'Login'
         ]);
     }
+
 
     protected function attempt()
     {
@@ -50,14 +43,16 @@ class SSOController extends Controller
             return auth()->attempt($username, $password, $remember);
         }
 
-        return false;   
+        return false;  
     }
 
-    public function auth()
-    {
-        $v = validate($_POST, [
-            'username' => [
-                'required' => true
+    public function auth() 
+    {    
+       $v = validate($_POST, [
+            'email' => [
+                'required' => true,
+                'max' => 50,
+                'email' => true
             ],
             'password' => [
                 'required' => true
@@ -65,25 +60,23 @@ class SSOController extends Controller
         ]);
 
         if(!$v->fails()) {
+
             if($this->attempt()) {
-               $url = HMAC::register(request('src'), auth()->user()->id, auth()->user()->username);
-               redirect($url);
+               return redirect('profile');
             } else {
-                session()->set('error', 'Wrong credentials or user not registered!');
-                $target = HMAC::parseUrl(request('src'));
-                return redirect($target['url'] . '?auth_error=1');
+                session()->set('error', 'Wrong credentials!');
+                return redirect('login');
             }
         } else {
             session()->set('errors', $v->errors()->get());
-            return redirect('sso.login');
+            return redirect('login');
         }
-
     }
 
     public function logout()
     {
         auth()->logout();
-        redirect('sso.login');
+        redirect('login');
     }
 
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Auth\SSO;
+namespace App\Auth\Providers;
 
 use Web\Security\Hash;
 
-use App\Host\HostModel as Host;
+use App\Host\Models\Host;
 
 use function parse_url;
 use function session;
 
-class HMACService 
+class HMACServiceProvider 
 {
     protected static $auth;
 

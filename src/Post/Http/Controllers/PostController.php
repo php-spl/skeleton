@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Post;
+namespace App\Post\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Service\Middleware\VerifyCSRF;
+use App\Provider\Http\Middleware\VerifyCSRF;
 
-use App\Post\PostModel as Post;
+use App\Post\Models\Post;
 
 class PostController extends Controller
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\User;
+namespace App\User\Models;
 
 use Web\Database\Model;
 
-class UserModel extends Model
+class User extends Model
 {
     protected $fillable = [
         'id',

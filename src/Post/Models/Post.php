@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Post;
+namespace App\Post\Models;
 
 use Web\Database\Model;
 
-class PostModel extends Model
+class Post extends Model
 {
     public function user($id = null)
     {

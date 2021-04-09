@@ -1,12 +1,12 @@
 <?php
 
-namespace App\User;
+namespace App\User\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Service\Middleware\VerifyCSRF;
+use App\Provider\Http\Middleware\VerifyCSRF;
 
-use App\User\UserModel as User;
+use App\User\Models\User;
 
 class UserController extends Controller
 {

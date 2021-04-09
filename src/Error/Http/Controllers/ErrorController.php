@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Error;
+namespace App\Error\Http\Controllers;
 
 use Web\Http\Controller;
 
