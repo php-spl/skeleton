@@ -53,6 +53,27 @@ function app_path($path = null, $default = 'app/') {
   return root_path($default);
 }
 
+function provider_path($path = null, $default = 'providers/') {
+  if($path) {
+    return app_path($default . $path);
+  }
+  return app_path($default);
+}
+
+function route_path($path = null, $default = 'routes/') {
+  if($path) {
+    return app_path($default . $path);
+  }
+  return app_path($default);
+}
+
+function config_path($path = null, $default = 'config/') {
+  if($path) {
+    return app_path($default . $path);
+  }
+  return app_path($default);
+}
+
 function src_path($path = null, $default = 'src/') {
   if($path) {
     return root_path($default . $path);
@@ -69,9 +90,9 @@ function public_path($path = null, $default = 'public/') {
 
 function storage_path($path = null, $default = 'storage/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 function cache_path($path = null, $default = 'cache/') {
@@ -90,16 +111,16 @@ function upload_path($path = null, $default = 'uploads/') {
 
 function resource_path($path, $default = 'resources/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 function database_path($path = null, $default = 'database/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 
@@ -128,16 +149,6 @@ function db() {
 
 // Views and templates
 function view($path, $data = []) {
-  return app('View')->render($path, $data);
-}
-
-function domain_view($path, $data = []) {
-  $path = explode('/', $path);
-  $domain = ucfirst($path[0]);
-  unset($path[0]);
-  $path = implode('/', $path);
-
-  app('View')->path = src_path($domain . '/views');
   return app('View')->render($path, $data);
 }
 
@@ -247,8 +258,4 @@ function password($password) {
 
 
 // MISC
-function is_assoc_array(array $arr)
-{
-    if (array() === $arr) return false;
-    return array_keys($arr) !== range(0, count($arr) - 1);
-}
+

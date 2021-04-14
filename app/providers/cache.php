@@ -14,6 +14,11 @@ return [
         return $cache;
     },
 
-    'ArrayCache' => Web\Cache\ArrayCache::class
+    'ArrayCache' => Web\Cache\ArrayCache::class,
 
+    'Cache' => function(Container $c) {
+        $driver = ucfirst(config('cache.driver'));
+        return $c->{$driver.'Cache'};
+    }
+ 
 ];

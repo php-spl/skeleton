@@ -2,6 +2,33 @@
 
 /*
 |--------------------------------------------------------------------------
+| Register Constants
+|--------------------------------------------------------------------------
+|
+| These are the main constants required to make the application work. 
+| You are welcome to register your own here or elsewhere.
+|
+*/
+
+define('ROOT_PATH', dirname(__DIR__));
+
+define('APP_START', microtime(true));
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| this application. We just need to utilize it! We'll simply require it
+| into the script here so we don't need to manually load our classes.
+|
+*/
+
+require_once ROOT_PATH . '/vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
 | Create The Application
 |--------------------------------------------------------------------------
 |
@@ -22,7 +49,7 @@ $app = new Web\App\Container;
 |
 */
 
-require_once ROOT_PATH . '/bootstrap/helpers.php';
+require_once ROOT_PATH . '/app/helpers.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +66,7 @@ if(file_exists($env)) {
 
     $_ENV = parse_ini_file($env, true);
 
-    foreach(glob(ROOT_PATH . '/config/*.php') as $config) {
+    foreach(glob(config_path('*.php')) as $config) {
        $_ENV[pathinfo($config, PATHINFO_FILENAME)] = require $config;    
     }
     
@@ -62,7 +89,7 @@ if(file_exists($env)) {
 |
 */
 
-foreach(glob(ROOT_PATH . '/app/*.php') as $service_provider) {
+foreach(glob(provider_path('*.php')) as $service_provider) {
     $services[] = require $service_provider;     
 }
 
@@ -84,7 +111,7 @@ foreach($services as $name => $provider) {
 |
 */
 
-foreach(glob(ROOT_PATH . '/routes/*.php') as $route) {
+foreach(glob(route_path('*.php')) as $route) {
     require_once $route; 
 }
 
