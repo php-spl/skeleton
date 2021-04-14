@@ -4,7 +4,7 @@ namespace App\Post\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Provider\Http\Middleware\VerifyCSRF;
+use App\Provider\Http\Middleware\VerifyCSRF as CSRF;
 
 use App\Post\Models\Post;
 
@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        VerifyCSRF::handle();
+        CSRF::handle();
     }
     
     public function index() 
@@ -20,6 +20,7 @@ class PostController extends Controller
         $posts = Post::factory()->select();
 
         view('posts/index', [
+            'title' => 'Articles',
             'posts' => $posts
         ]);
     }
@@ -41,7 +42,7 @@ class PostController extends Controller
         ]);
 
         if(!$v->fails()) {
-            $post = model('Post')->insert([
+            $post = Post::factory()->insert([
                 'title' => request()->get('title'),
                 'user_id' => 2,
                 'body' => request()->get('body')
@@ -62,13 +63,17 @@ class PostController extends Controller
 
     public function show($id)
     {
-        
-        $post = model('Post')->select('posts.*, users.*')
+
+        $post = Post::factory()->select()
                             ->join('users')
                             ->on('posts.user_id', 'users.id')
                             ->where('posts.id', $id)
-                            ->execute();
-        view('frontend/posts/show', [
+                            ->toString();
+
+        halt($post);
+
+        view('posts/show', [
+            'tite' => $post->title,
             'post' => $post
         ]);
     }

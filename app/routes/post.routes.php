@@ -7,18 +7,11 @@ use App\Post\Http\Controllers\PostController;
 router()->get('/posts', PostController::class . '@index')->name('posts');
  
 router()->prefix('post/', function() {
-    router()->post('store', function() {
-        return controller(Post::class)->store();
-     })->name('post.store');
+    router()->post('store', PostController::class . '@store')->name('post.store');
       
-     router()->get('create', function() {
-          Authenticate::handle();
-         return controller(Post::class)->create();
-     })->name('post.create');
+     router()->get('create', PostController::class . '@create')->name('post.create');
        
-     router()->get('{id}', function($id) {
-         return controller(Post::class)->show($id);
-     })->name('post.show',);
+     router()->get('{id}', PostController::class . '@show')->name('post.show',);
       
 });
 
