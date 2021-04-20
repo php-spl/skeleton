@@ -4,15 +4,13 @@ namespace App\Post\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Provider\Http\Middleware\VerifyCSRF as CSRF;
-
 use App\Post\Models\Post;
 
 class PostController extends Controller
 {
     public function __construct()
     {
-        CSRF::handle();
+        
     }
     
     public function index() 
