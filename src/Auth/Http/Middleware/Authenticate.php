@@ -2,12 +2,13 @@
 
 namespace App\Auth\Http\Middleware;
 
-use Web\Http\Middleware;
+use Web\Http\Interfaces\MiddlewareInterface;
 
-class Authenticate extends Middleware
+
+class Authenticate implements MiddlewareInterface
 {
 
-  public static function handle()
+  public function handle($request, $next)
   {
     if(!app('Auth')) {
       return true;
@@ -15,10 +16,8 @@ class Authenticate extends Middleware
 
     if(!session('user')) {
       return redirect('login');
-    } else {
-      return true;
     }
 
-    return true;
+    return $next($request);
   }
 }

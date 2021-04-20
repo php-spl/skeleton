@@ -6,8 +6,6 @@ use Web\Http\Controller;
 
 use App\Auth\Providers\HMACServiceProvider as HMAC;
 
-use App\Provider\Http\Middleware\VerifyCSRF;
-
 use function request;
 use function view;
 use function session;
@@ -20,7 +18,7 @@ class SSOController extends Controller
 
     public function __construct()
     {
-       VerifyCSRF::handle();
+
     }
 
     public function login() 

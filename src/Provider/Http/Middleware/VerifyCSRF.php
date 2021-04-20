@@ -2,15 +2,16 @@
 
 namespace App\Provider\Http\Middleware;
 
-use Web\Http\Middleware;
+use Web\Http\Interfaces\MiddlewareInterface;
 
-class VerifyCSRF extends Middleware 
+class VerifyCSRF implements MiddlewareInterface
 {
-  public static function handle()
+  public function handle($request, $next)
   {
     if(app('CSRF')) {
       app('CSRF')->check();
     }
-    return true;
+
+    return $next($request);
   }
 }

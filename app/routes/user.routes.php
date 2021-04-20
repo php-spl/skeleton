@@ -2,7 +2,7 @@
 
 use App\User\Http\Controllers\UserController;
  
- router()->get('/register', UserController::class . '@index')->name('register');
+ router()->get('/register', UserController::class . '@create')->name('register');
  
  router()->post('/register', UserController::class . '@store');
 

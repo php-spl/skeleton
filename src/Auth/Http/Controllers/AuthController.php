@@ -4,8 +4,6 @@ namespace App\Auth\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Provider\Http\Middleware\VerifyCSRF;
-
 use function request;
 use function view;
 use function session;
@@ -18,7 +16,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-       VerifyCSRF::handle();
+       
     }
 
     public function login() 

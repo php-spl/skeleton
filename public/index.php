@@ -33,7 +33,7 @@ $app->Session->start();
 |
 */
 
-$app->Router->run();
+$app->Router->run($app);
 
 
 

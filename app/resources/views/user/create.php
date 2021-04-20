@@ -1,4 +1,4 @@
-<?php include layout('auth/header') ?>
+<?php include layout('backend/auth/header') ?>
 <?php include component('error/messages') ?>
 <main class="form-signin">
   <form method="post" action="<?php route('register') ?>">
@@ -19,4 +19,4 @@
   </form>
 </main>
 
-<?php include layout('auth/footer') ?>
+<?php include layout('backend/auth/footer') ?>

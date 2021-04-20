@@ -4,8 +4,6 @@ namespace App\User\Http\Controllers;
 
 use Web\Http\Controller;
 
-use App\Provider\Http\Middleware\VerifyCSRF;
-
 use App\User\Models\User;
 
 class UserController extends Controller
@@ -13,7 +11,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-       VerifyCSRF::handle();
+
     }
     
     public function index() 

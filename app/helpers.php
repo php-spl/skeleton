@@ -233,7 +233,7 @@ function redirect($url, $params = []) {
 
 
 // Authentication and validation
-function auth() {
+function auth($guard = null) {
   return app('Auth');
 }
 
