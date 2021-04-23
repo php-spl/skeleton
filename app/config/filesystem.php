@@ -14,6 +14,10 @@ return [
     'view' => [
         'path' => resource_path('views'),
         'layouts' => resource_path('views/layouts')
+    ],
+
+    'upload' => [
+        'path' => upload_path()
     ]
     
 ];

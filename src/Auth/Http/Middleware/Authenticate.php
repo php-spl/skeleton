@@ -2,7 +2,7 @@
 
 namespace App\Auth\Http\Middleware;
 
-use Web\Http\Interfaces\MiddlewareInterface;
+use Spl\Http\Interfaces\MiddlewareInterface;
 
 
 class Authenticate implements MiddlewareInterface

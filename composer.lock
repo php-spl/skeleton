@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5120e47e2786143b39608db58a67085",
+    "content-hash": "a70a8ed2b55c72115f5407393fc5a754",
     "packages": [
         {
-            "name": "datalaere/php-web-framework",
+            "name": "php-spl/framework",
             "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/datalaere/php-web-framework.git",
-                "reference": "6afb675cf8909fe478758007b12dc94e4b762d22"
+                "url": "https://github.com/php-spl/framework.git",
+                "reference": "1fe759696ef92d0e3ee814f6bac4a42e87476f6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datalaere/php-web-framework/zipball/6afb675cf8909fe478758007b12dc94e4b762d22",
-                "reference": "6afb675cf8909fe478758007b12dc94e4b762d22",
+                "url": "https://api.github.com/repos/php-spl/framework/zipball/1fe759696ef92d0e3ee814f6bac4a42e87476f6d",
+                "reference": "1fe759696ef92d0e3ee814f6bac4a42e87476f6d",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Web\\": "src",
+                    "Spl\\": "src",
                     "Tests\\": "tests"
                 }
             },
@@ -50,10 +50,51 @@
             ],
             "description": "A series of libraries/components that form the basics of many website and most frameworks.",
             "support": {
-                "source": "https://github.com/datalaere/php-web-framework/tree/main",
-                "issues": "https://github.com/datalaere/php-web-framework/issues"
+                "source": "https://github.com/php-spl/framework/tree/main",
+                "issues": "https://github.com/php-spl/framework/issues"
             },
-            "time": "2021-04-19T09:29:44+00:00"
+            "time": "2021-04-23T12:13:48+00:00"
+        },
+        {
+            "name": "php-spl/helpers",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-spl/helpers.git",
+                "reference": "7f4f2580a2b4a4923ee8e7854c92f692c44e32cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-spl/helpers/zipball/7f4f2580a2b4a4923ee8e7854c92f692c44e32cf",
+                "reference": "7f4f2580a2b4a4923ee8e7854c92f692c44e32cf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Spl\\": "src",
+                    "Tests\\": "tests"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Thomas Elvin",
+                    "email": "info@datalaere.dk"
+                }
+            ],
+            "description": "A collection of usefull global 'helper' PHP functions",
+            "support": {
+                "source": "https://github.com/php-spl/helpers/tree/main",
+                "issues": "https://github.com/php-spl/helpers/issues"
+            },
+            "time": "2021-04-23T12:17:03+00:00"
         },
         {
             "name": "psr/cache",
@@ -311,7 +352,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "datalaere/php-web-framework": 20
+        "php-spl/framework": 20,
+        "php-spl/helpers": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

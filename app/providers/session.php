@@ -1,18 +1,21 @@
 <?php
 
-use Web\App\Container;
+use Spl\App\Container;
+use Spl\Session\NativeSession;
+use Spl\Session\PDOSession;
+use Spl\Globals\Cookie;
 
 return [
 
-   'Session' => Web\Session\NativeSession::class,
+   'Session' => NativeSession::class,
 
    'Sessions' => function(Container $c) {
-      $session = new Web\Session\PDOSession($c->DB->pdo, [
+      $session = new PDOSession($c->DB->pdo, [
          'table_name' => 'sessions'
       ]);
       return $session;
    },
 
-   'Cookie' => Web\Session\Cookie::class
+   'Cookie' => Cookie::class
    
 ];

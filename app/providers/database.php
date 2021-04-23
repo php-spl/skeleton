@@ -1,9 +1,9 @@
 <?php
 
-use Web\App\Container;
-use Web\Database\Connection;
-use Web\Database\Model;
-use Web\Database\SQL;
+use Spl\App\Container;
+use Spl\Database\Connection;
+use Spl\Database\Model;
+use Spl\Database\SQL;
 
 return [
 

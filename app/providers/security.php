@@ -1,12 +1,12 @@
 <?php
 
-use Web\App\Container;
-use Web\Security\CSRF;
-use Web\Security\Validator;
-use Web\Security\Auth;
-use Web\Security\Hash;
-use Web\Security\Password;
-use Web\Security\UUID;
+use Spl\App\Container;
+use Spl\Security\CSRF;
+use Spl\Security\Validator;
+use Spl\Security\Auth;
+use Spl\Security\Hash;
+use Spl\Security\Password;
+use Spl\Security\UUID;
 
 use App\User\Models\User;
 

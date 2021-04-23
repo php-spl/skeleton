@@ -2,7 +2,7 @@
 
 namespace App\Admin\Http\Controllers;
 
-use Web\Http\Controller;
+use Spl\Http\Controller;
 
 class AdminController extends Controller
 {

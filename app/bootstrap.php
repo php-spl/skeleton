@@ -38,7 +38,7 @@ require_once ROOT_PATH . '/vendor/autoload.php';
 |
 */
 
-$app = new Web\App\Container;
+$app = new Spl\App\Container;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,7 +72,7 @@ if(file_exists($env)) {
     
     // Config
     $app->set('Config', function() {
-        $config = new Web\App\Config;
+        $config = new Spl\App\Config;
         $config->load($_ENV);
         return $config;
     });

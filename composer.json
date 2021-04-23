@@ -1,16 +1,21 @@
 {
-    "name": "datalaere/php-web-app",
+    "name": "php-spl/skeleton",
     "type": "library",
     "description": "PHP default web project.",
     "license": "MIT",
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/datalaere/php-web-framework"
+            "url": "https://github.com/php-spl/framework"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/php-spl/helpers"
         }
     ],
     "require": {
-        "datalaere/php-web-framework": "dev-main"
+        "php-spl/framework": "dev-main",
+        "php-spl/helpers": "dev-main"
     },
     "config": {
         "optimize-autoloader": true

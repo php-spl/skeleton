@@ -2,7 +2,7 @@
 
 namespace App\Host\Http\Controllers;
 
-use Web\Http\Controller;
+use Spl\Http\Controller;
 
 class HostController extends Controller
 {

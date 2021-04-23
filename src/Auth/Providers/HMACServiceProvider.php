@@ -2,7 +2,7 @@
 
 namespace App\Auth\Providers;
 
-use Web\Security\Hash;
+use Spl\Security\Hash;
 
 use App\Host\Models\Host;
 

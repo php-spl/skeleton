@@ -2,7 +2,7 @@
 
 namespace App\Page\Http\Controllers;
 
-use Web\Http\Controller;
+use Spl\Http\Controller;
 use App\Page\Models\Page;
 
 class PageController extends Controller

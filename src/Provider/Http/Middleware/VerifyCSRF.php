@@ -2,7 +2,7 @@
 
 namespace App\Provider\Http\Middleware;
 
-use Web\Http\Interfaces\MiddlewareInterface;
+use Spl\Http\Interfaces\MiddlewareInterface;
 
 class VerifyCSRF implements MiddlewareInterface
 {

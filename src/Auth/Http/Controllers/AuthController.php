@@ -2,7 +2,7 @@
 
 namespace App\Auth\Http\Controllers;
 
-use Web\Http\Controller;
+use Spl\Http\Controller;
 
 use function request;
 use function view;

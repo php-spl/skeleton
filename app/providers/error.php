@@ -1,11 +1,11 @@
 <?php
 
-// Cookie handler
+use Spl\Error\ErrorHandler;
 
 return [
 
     'Error' => function() {
-        return new Web\Error\ErrorHandler;
+        return new ErrorHandler;
     }
     
 ];

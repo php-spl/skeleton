@@ -2,7 +2,7 @@
 
 namespace App\Post\Http\Controllers;
 
-use Web\Http\Controller;
+use Spl\Http\Controller;
 
 use App\Post\Models\Post;
 
