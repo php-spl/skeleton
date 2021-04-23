@@ -7,6 +7,7 @@ use Spl\Security\Auth;
 use Spl\Security\Hash;
 use Spl\Security\Password;
 use Spl\Security\UUID;
+use Spl\Security\HMAC;
 
 use App\User\Models\User;
 
@@ -30,6 +31,10 @@ return [
 
     'Hash' => function() {
         return new Hash;
+    },
+
+    'HMAC' => function() {
+        return new HMAC;
     },
 
     'UUID' => function() {

@@ -66,7 +66,7 @@ class PostController extends Controller
                             ->join('users')
                             ->on('posts.user_id', 'users.id')
                             ->where('posts.id', $id)
-                            ->toString();
+                            ->execute();
 
         halt($post);
 

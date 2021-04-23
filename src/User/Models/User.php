@@ -2,7 +2,7 @@
 
 namespace App\User\Models;
 
-use Web\Database\Model;
+use Spl\Database\Model;
 
 class User extends Model
 {

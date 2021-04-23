@@ -2,7 +2,7 @@
 
 namespace App\Post\Models;
 
-use Web\Database\Model;
+use Spl\Database\Model;
 
 class Post extends Model
 {

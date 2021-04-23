@@ -2,7 +2,7 @@
 
 namespace App\Host\Models;
 
-use Web\Database\Model;
+use Spl\Database\Model;
 
 class Host extends Model
 {

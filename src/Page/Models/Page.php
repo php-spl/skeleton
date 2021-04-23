@@ -2,7 +2,7 @@
 
 namespace App\Page\Models;
 
-use Web\Database\Model;
+use Spl\Database\Model;
 
 class Page extends Model
 {
