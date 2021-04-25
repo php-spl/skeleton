@@ -7,15 +7,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/php-spl/framework"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/php-spl/helpers"
         }
     ],
     "require": {
-        "php-spl/framework": "dev-main",
-        "php-spl/helpers": "dev-main"
+        "php-spl/framework": "dev-main"
     },
     "config": {
         "optimize-autoloader": true
