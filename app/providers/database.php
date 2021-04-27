@@ -1,20 +1,25 @@
 <?php
 
-use Spl\App\Container;
+use Spl\DI\Container;
 use Spl\Database\Connection;
 use Spl\Database\Model;
 use Spl\Database\SQL;
+use Spl\Database\ORM;
 
 return [
 
-    'DB' => Connection::factory(Config('database.connections.' . env('DB_DRIVER', 'mysql'))),
+    'dbconnect' => Connection::factory($app->config->get('database.connections.' . env('DB_DRIVER', 'mysql'))),
 
-    'Model' => function(Container $c) {
-        return new Model($c->DatabaseDB);
+    'model' => function(Container $c) {
+        return new Model($c->dbconnect);
     },
 
-    'SQL' => function() {
+    'sql' => function() {
         return new SQL;
+    },
+
+    'db' => function(Container $c) {
+        return new ORM($c->dbconnect);
     }
 
 ];

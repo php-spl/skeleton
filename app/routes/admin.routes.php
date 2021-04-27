@@ -9,10 +9,8 @@ router()->get('/admin', AdminController::class . '@index')->name('admin');
 // Posts
 router()->get('/admin/posts', PostController::class . '@index')->name('admin.posts');
 
- router()->get('/admin/post/create', PostController::class . '@create')->name('admin.post.create');
+router()->get('/admin/post/create', PostController::class . '@create')->name('admin.post.create');
 
- router()->post('/admin/post', function() {
-   return controller(Post::class)->store();
- });
+router()->post('/admin/post', PostController::class . '@store');
  
 

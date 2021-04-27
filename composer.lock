@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a70a8ed2b55c72115f5407393fc5a754",
+    "content-hash": "4d3a4eb42c963d3b46e197cc51ba6a96",
     "packages": [
         {
             "name": "php-spl/framework",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-spl/framework.git",
-                "reference": "c23a661ce59a33859437145ceebfb78a70b78d4e"
+                "reference": "d4b3181070e0ccab0749e63f529e38edeab901a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-spl/framework/zipball/c23a661ce59a33859437145ceebfb78a70b78d4e",
-                "reference": "c23a661ce59a33859437145ceebfb78a70b78d4e",
+                "url": "https://api.github.com/repos/php-spl/framework/zipball/d4b3181070e0ccab0749e63f529e38edeab901a7",
+                "reference": "d4b3181070e0ccab0749e63f529e38edeab901a7",
                 "shasum": ""
             },
             "require": {
@@ -37,6 +37,9 @@
             "default-branch": true,
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
                 "psr-4": {
                     "Spl\\": "src",
                     "Tests\\": "tests"
@@ -53,48 +56,7 @@
                 "source": "https://github.com/php-spl/framework/tree/main",
                 "issues": "https://github.com/php-spl/framework/issues"
             },
-            "time": "2021-04-23T20:03:54+00:00"
-        },
-        {
-            "name": "php-spl/helpers",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-spl/helpers.git",
-                "reference": "8dd2c7980dbd37f060a674c818b6af0b3057b6c0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-spl/helpers/zipball/8dd2c7980dbd37f060a674c818b6af0b3057b6c0",
-                "reference": "8dd2c7980dbd37f060a674c818b6af0b3057b6c0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.3"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Spl\\": "src",
-                    "Tests\\": "tests"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Thomas Elvin",
-                    "email": "info@datalaere.dk"
-                }
-            ],
-            "description": "A collection of usefull global 'helper' PHP functions",
-            "support": {
-                "source": "https://github.com/php-spl/helpers/tree/main",
-                "issues": "https://github.com/php-spl/helpers/issues"
-            },
-            "time": "2021-04-23T13:33:11+00:00"
+            "time": "2021-04-27T19:17:58+00:00"
         },
         {
             "name": "psr/cache",
@@ -352,8 +314,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "php-spl/framework": 20,
-        "php-spl/helpers": 20
+        "php-spl/framework": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

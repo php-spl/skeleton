@@ -1,16 +1,18 @@
 <?php
 
-use Spl\App\Container;
-use Spl\App\Translator;
+use Spl\DI\Container;
+use Spl\Filesystem\Translator;
 
 return [
 
-    'App' => Container::class,
+    'app' => function() use ($app) {
+        return $app;
+    },
     
-    'Translator' => function() {
+    'translator' => function(Container $c) {
         $translator = new Translator;
         $translator->setLocalesDir(resource_path('/locales'));
-        $translator->setDefaultLanguage(config('app.locale'));
+        $translator->setDefaultLanguage($c->config->get('app.locale'));
         return $translator;
     }
 

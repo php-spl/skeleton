@@ -1,5 +1,6 @@
 <?php
 
+use Spl\DI\Container;
 use Spl\Filesystem\View;
 use Spl\Filesystem\Image;
 use Spl\Filesystem\Upload;
@@ -7,21 +8,21 @@ use Spl\Filesystem\Zip;
 
 return [
 
-   'View' => function() {
+   'view' => function(Container $c) {
         $view = new View;
-        $view->path = config('filesystem.view.path');
+        $view->path = $c->config->get('filesystem.view.path');
         return $view;
     },
 
-    'Image' => function() {
+    'image' => function() {
         return new Image;
     },
 
-    'Upload' => function() {
-        return new Upload(config('filesystem.upload.path'));
+    'upload' => function(Container $c) {
+        return new Upload($c->config->get('filesystem.upload.path'));
     },
 
-    'Zip' => function() {
+    'zip' => function() {
         return new Zip;
     }
 

@@ -9,7 +9,7 @@
 |
 */
 
-$app = require_once dirname(__DIR__) . '/app/bootstrap.php';
+require_once dirname(__DIR__) . '/app/bootstrap.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ $app = require_once dirname(__DIR__) . '/app/bootstrap.php';
 |
 */
 
-$app->Session->start();
+session()->start();
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ $app->Session->start();
 |
 */
 
-$app->Router->run($app);
+router()->run();
 
 
 

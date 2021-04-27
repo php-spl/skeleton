@@ -38,7 +38,7 @@ require_once ROOT_PATH . '/vendor/autoload.php';
 |
 */
 
-$app = new Spl\App\Container;
+$app = new Spl\DI\Container;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ if(file_exists($env)) {
     }
     
     // Config
-    $app->set('Config', function() {
+    $app->set('config', function() {
         $config = new Spl\App\Config;
         $config->load($_ENV);
         return $config;
@@ -103,6 +103,21 @@ foreach($services as $name => $provider) {
 
 /*
 |--------------------------------------------------------------------------
+| Setup proxies and autoloading
+|--------------------------------------------------------------------------
+|
+| Now we setup simple interfaces with proxies to the container.
+|
+*/
+
+use Spl\DI\Proxy;
+Proxy::setProxyApplication($app);
+
+use Spl\DI\Alias;
+Alias::getInstance($app->config->get('alias'))->register();
+
+/*
+|--------------------------------------------------------------------------
 | Bind Routes
 |--------------------------------------------------------------------------
 |
@@ -131,37 +146,3 @@ if(config('app.debug')) {
     ini_set('display_errors', 0);
     error_reporting(0);
 }
-
-if(config('app.env') === 'maint') {
-   // return redirect('error', ['code' => 503]);
-}
-
-/*
-|--------------------------------------------------------------------------
-| Migrate database and seeds
-|--------------------------------------------------------------------------
-|
-| If we have database to migrate, do so.
-|
-*/
-
-if(config('db.migrate')) {
-    sql()->import(database_path('migrates/') . config('db.migrate'), db()->pdo);
-}
-
-if(config('db.seed')) {
-    sql()->import(database_path('seeds/') . config('db.seed'), db()->pdo);
-}
-
-/*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
-
-return $app;

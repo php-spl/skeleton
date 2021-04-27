@@ -1,7 +1,7 @@
 <?php
 
-use Spl\App\Container;
-use Spl\Security\CSRF;
+use Spl\DI\Container;
+use Spl\Security\Token;
 use Spl\Security\Validator;
 use Spl\Security\Auth;
 use Spl\Security\Hash;
@@ -13,35 +13,35 @@ use App\User\Models\User;
 
 return [
 
-    'CSRF' => function() {
-        return new CSRF(config('app.key'));
+    'token' => function(Container $c) {
+        return new Token($c->config->get('app.key'));
     },
 
-    'Validator' => function(Container $c) {
+    'validator' => function(Container $c) {
         return new Validator($c->Model, $c->Error);
     },
 
-    'Auth' => function(Container $c) {
+    'auth' => function(Container $c) {
         return new Auth(
             User::factory(),
-            $c->Session,
-            $c->Cookie
+            $c->session,
+            $c->cookie
         );
     },
 
-    'Hash' => function() {
+    'hash' => function() {
         return new Hash;
     },
 
-    'HMAC' => function() {
+    'hmac' => function() {
         return new HMAC;
     },
 
-    'UUID' => function() {
+    'uuid' => function() {
         return new UUID;
     },
 
-    'Password' => function() {
+    'password' => function() {
         return new Password;
     }
 

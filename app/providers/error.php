@@ -1,11 +1,11 @@
 <?php
 
-use Spl\Error\ErrorHandler;
+use Spl\Error\Handler;
 
 return [
 
-    'Error' => function() {
-        return new ErrorHandler;
+    'error' => function() {
+        return new Handler;
     }
     
 ];

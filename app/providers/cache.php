@@ -1,27 +1,27 @@
 <?php
 
-use Spl\App\Container;
+use Spl\DI\Container;
 use Spl\Cache\FileCache;
 use Spl\Cache\PDOCache;
 use Spl\Cache\ArrayCache;
 
 return [
 
-    'FileCache' => function() {
+    'filecache' => function() {
         $cache = new FileCache(storage_path('cache/')); 
         return $cache;
     },
 
-    'PDOCache' => function(Container $c) {
-        $cache = new PDOCache($c->DB->pdo, config('cache.table'));
+    'pdocache' => function(Container $c) {
+        $cache = new PDOCache($c->DB->pdo, $c->config->get('cache.table'));
         return $cache;
     },
 
-    'ArrayCache' => ArrayCache::class,
+    'arraycache' => ArrayCache::class,
 
-    'Cache' => function(Container $c) {
-        $driver = ucfirst(config('cache.driver'));
-        return $c->{$driver.'Cache'};
+    'cache' => function(Container $c) {
+        $driver = ucfirst($c->config->get('cache.driver'));
+        return $c->{$driver.'cache'};
     }
  
 ];
