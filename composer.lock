@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-spl/framework.git",
-                "reference": "d4b3181070e0ccab0749e63f529e38edeab901a7"
+                "reference": "c0a7b41c8694ff8cfdddee74f5d2a177355e577c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-spl/framework/zipball/d4b3181070e0ccab0749e63f529e38edeab901a7",
-                "reference": "d4b3181070e0ccab0749e63f529e38edeab901a7",
+                "url": "https://api.github.com/repos/php-spl/framework/zipball/c0a7b41c8694ff8cfdddee74f5d2a177355e577c",
+                "reference": "c0a7b41c8694ff8cfdddee74f5d2a177355e577c",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "source": "https://github.com/php-spl/framework/tree/main",
                 "issues": "https://github.com/php-spl/framework/issues"
             },
-            "time": "2021-04-27T19:17:58+00:00"
+            "time": "2021-04-28T13:31:43+00:00"
         },
         {
             "name": "psr/cache",

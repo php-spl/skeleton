@@ -5,21 +5,26 @@ use Spl\Database\Connection;
 use Spl\Database\Model;
 use Spl\Database\SQL;
 use Spl\Database\ORM;
+use Spl\Database\Query;
 
 return [
 
-    'dbconnect' => Connection::factory($app->config->get('database.connections.' . env('DB_DRIVER', 'mysql'))),
+    'dbconnect' => Connection::singleton($app->config->get('database.connections.' . env('DB_DRIVER', 'mysql'))),
 
     'model' => function(Container $c) {
-        return new Model($c->dbconnect);
+        return new Model($c->dbconnect->pdo);
     },
 
     'sql' => function() {
         return new SQL;
     },
 
+    'orm' => function(Container $c) {
+        return new ORM($c->dbconnect->pdo);
+    },
+
     'db' => function(Container $c) {
-        return new ORM($c->dbconnect);
+        return new Query($c->dbconnect->pdo);
     }
 
 ];

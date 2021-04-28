@@ -115,6 +115,7 @@ Proxy::setProxyApplication($app);
 
 use Spl\DI\Alias;
 Alias::getInstance($app->config->get('alias'))->register();
+Alias::getInstance();
 
 /*
 |--------------------------------------------------------------------------
