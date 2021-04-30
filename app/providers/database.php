@@ -11,10 +11,6 @@ return [
 
     'dbconnect' => Connection::singleton($app->config->get('database.connections.' . env('DB_DRIVER', 'mysql'))),
 
-    'model' => function(Container $c) {
-        return new Model($c->dbconnect->pdo);
-    },
-
     'sql' => function() {
         return new SQL;
     },

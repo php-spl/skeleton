@@ -6,6 +6,8 @@ use Spl\Database\Model;
 
 class Post extends Model
 {
+   // protected $table = 'posts';
+
     public function user($id = null)
     {
         if($id) {
