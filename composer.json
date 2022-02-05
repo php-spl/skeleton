@@ -13,11 +13,11 @@
         "php-spl/framework": "dev-main"
     },
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": false
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Spl\\": "src/"
         }
     },
     "autoload-dev": {
