@@ -10,7 +10,7 @@
 |
 */
 
-define('ROOT_PATH', dirname(__FILE__));
+define('ROOT_PATH', dirname(__DIR__));
 
 define('APP_START', microtime(true));
 
@@ -49,7 +49,7 @@ $app = new Spl\DI\Container;
 |
 */
 
-require_once ROOT_PATH . '/helpers.php';
+require_once ROOT_PATH . '/app/helpers.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +60,7 @@ require_once ROOT_PATH . '/helpers.php';
 |
 */
 
-$env = ROOT_PATH . '/env.ini';
+$env = ROOT_PATH . '/app/env.ini';
 
 if(file_exists($env)) {
 
@@ -127,14 +127,11 @@ Alias::getInstance();
 |
 */
 
-require_once src_path('/Domain/Admin/admin.routes.php');
-require_once src_path('/Domain/Auth/auth.routes.php');
-require_once src_path('/Domain/Error/error.routes.php');
-require_once src_path('/Domain/Host/host.routes.php');
-require_once src_path('/Domain/Page/page.routes.php');
-require_once src_path('/Domain/Post/post.routes.php');
-require_once src_path('/Domain/User/user.routes.php');
+$routes = glob_r(src_path("/*/*.routes.php"));
 
+foreach($routes as $route) {
+    require $route;
+}
 
 /*
 |--------------------------------------------------------------------------

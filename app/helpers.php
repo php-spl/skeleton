@@ -1,5 +1,19 @@
 <?php
 
+if ( ! function_exists('glob_r'))
+{
+    // Does not support flag GLOB_BRACE        
+   function glob_r($pattern, $flags = 0)
+   {
+     $files = glob($pattern, $flags);
+     foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir)
+     {
+       $files = array_merge($files, glob_r($dir.'/'.basename($pattern), $flags));
+     }
+     return $files;
+   }
+}
+
 // Paths
 function root_path($path = null, $default = '/') {
   if($path) {
