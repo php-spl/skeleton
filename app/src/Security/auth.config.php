@@ -9,7 +9,7 @@ use Spl\Security\Password;
 use Spl\Security\UUID;
 use Spl\Security\HMAC;
 
-use App\User\Models\User;
+use App\User\UserModel;
 
 return [
 
@@ -23,7 +23,7 @@ return [
 
     'auth' => function(Container $c) {
         return new Auth(
-            User::factory(),
+            UserModel::singleton(),
             $c->session,
             $c->cookie
         );

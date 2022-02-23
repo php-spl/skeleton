@@ -1,8 +1,8 @@
 <?php
 
-use App\Auth\Http\Middleware\Authenticate;
-use App\Admin\Http\Controllers\AdminController;
-use App\Post\Http\Controllers\PostController;
+//use App\Auth\Authenticate;
+use App\Admin\AdminController;
+use App\Post\PostController;
 
 router()->get('/admin', AdminController::class . '@index')->name('admin');
 

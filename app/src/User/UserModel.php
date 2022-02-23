@@ -1,6 +1,6 @@
 <?php
 
-namespace App\User\Models;
+namespace App\User;
 
 use Spl\Database\Model;
 

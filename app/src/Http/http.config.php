@@ -14,7 +14,7 @@ return [
 
     'middleware' => function() {
         $middleware = new Middleware([
-            new App\Provider\Http\Middleware\VerifyCSRF
+            new App\CSRF\Verify
         ]);
         return $middleware;
     },

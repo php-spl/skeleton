@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth\Http\Middleware;
+namespace App\Security;
 
 use Spl\Http\Interfaces\MiddlewareInterface;
 

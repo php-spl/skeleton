@@ -17,18 +17,10 @@ return [
     | the usual view path has already been registered for you.
     |
     */
-    'view' => [
-        'path' => resource_path('views'),
-        'layouts' => resource_path('views/layouts')
-    ],
-
-    'upload' => [
-        'path' => upload_path()
-    ],
 
     'view' => function(Container $c) {
         $view = new View;
-        $view->path = $c->config->get('filesystem.view.path');
+        $view->path = $c->config->get('app.view.path');
         return $view;
     },
 
@@ -37,7 +29,7 @@ return [
     },
 
     'upload' => function(Container $c) {
-        return new Upload($c->config->get('filesystem.upload.path'));
+        return new Upload($c->config->get('app.upload.path'));
     },
 
     'zip' => function() {

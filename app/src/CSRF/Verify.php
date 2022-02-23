@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Provider\Http\Middleware;
+namespace App\CSRF;
 
 use Spl\Http\Interfaces\MiddlewareInterface;
 

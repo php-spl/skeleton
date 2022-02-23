@@ -72,7 +72,7 @@ function database_path($path = null, $default = 'database/') {
   return root_path($default);
 }
 
-function layout($include, $default = 'file.view.layouts') {
+function layout($include, $default = 'app.view.layouts') {
   return config($default) . DIRECTORY_SEPARATOR . $include . '.php';
  }
 

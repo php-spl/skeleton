@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth\Http\Controllers;
+namespace App\Security;
 
 use Spl\Http\Controller;
 
