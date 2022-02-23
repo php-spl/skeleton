@@ -83,13 +83,13 @@ if(file_exists($env)) {
 | Autoload Service Providers
 |--------------------------------------------------------------------------
 |
-| The service providers listed in the "app" folder will automatically be loaded on the
+| The service providers listed in the "config" folder will automatically be loaded on the
 | request to your application. Feel free to add your own services to
-| the "app" folders as arrays to grant expanded functionality to your applications.
+| the "config" folders as arrays to grant expanded functionality to your applications.
 |
 */
 
-foreach(glob(app_path('*.php')) as $service_provider) {
+foreach(glob_r(src_path("/*/*.config.php")) as $service_provider) {
     $services[] = require $service_provider;     
 }
 

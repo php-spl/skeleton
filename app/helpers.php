@@ -1,19 +1,5 @@
 <?php
 
-if ( ! function_exists('glob_r'))
-{
-    // Does not support flag GLOB_BRACE        
-   function glob_r($pattern, $flags = 0)
-   {
-     $files = glob($pattern, $flags);
-     foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir)
-     {
-       $files = array_merge($files, glob_r($dir.'/'.basename($pattern), $flags));
-     }
-     return $files;
-   }
-}
-
 // Paths
 function root_path($path = null, $default = '/') {
   if($path) {
@@ -31,16 +17,17 @@ function app_path($path = null, $default = 'app/') {
 
 function config_path($path = null, $default = 'config/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
+
 
 function src_path($path = null, $default = 'src/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 function public_path($path = null, $default = 'public/') {
@@ -52,9 +39,9 @@ function public_path($path = null, $default = 'public/') {
 
 function storage_path($path = null, $default = 'storage/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 function cache_path($path = null, $default = 'cache/') {
@@ -73,9 +60,9 @@ function upload_path($path = null, $default = 'uploads/') {
 
 function resource_path($path, $default = 'resources/') {
   if($path) {
-    return root_path($default . $path);
+    return app_path($default . $path);
   }
-  return root_path($default);
+  return app_path($default);
 }
 
 function database_path($path = null, $default = 'database/') {
@@ -85,11 +72,11 @@ function database_path($path = null, $default = 'database/') {
   return root_path($default);
 }
 
-function layout($include, $default = 'filesystem.view.layouts') {
+function layout($include, $default = 'file.view.layouts') {
   return config($default) . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
- function component($include, $default = 'filesystem.view.path') {
+ function component($include, $default = 'file.view.path') {
  return config($default) . DIRECTORY_SEPARATOR . $include . '.php';
  }
 
